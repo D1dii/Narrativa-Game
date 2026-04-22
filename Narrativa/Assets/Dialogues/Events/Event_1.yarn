@@ -1,0 +1,11 @@
+﻿title: Event_1
+---
+This is an example of a sequence of events.
+
+Now we will jump to the next event in the sequence, which is random.
+
+<<declare $nextEventName = "name" >>
+<<set $nextEventName to NextEvent(1) >>
+
+<<jump {$nextEventName}>>
+===
