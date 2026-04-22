@@ -1,13 +1,13 @@
 using UnityEngine;
 using Yarn.Unity;
 
-public class EventManager : MonoBehaviour
+public class EventManager
 {
 
-    [YarnCommand]
-    public void NextEvent()
+    [YarnFunction("NextEvent")]
+    public static string NextEvent()
     {
-        Debug.Log("Next Event!");
+        return "SecondEvent";
     }
 
 }
