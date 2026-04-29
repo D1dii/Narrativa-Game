@@ -3,20 +3,28 @@ using Yarn.Unity;
 
 public class ImageLoader : MonoBehaviour
 {
-    public static GameObject myCanvas;
+
+    [SerializeField] private Canvas canvasToActivate;
+
+    public static Canvas myCanvas;
+
+    private void Awake()
+    {
+        myCanvas = canvasToActivate;
+    }
 
     [YarnCommand("ShowImageOnScreen")]
     public static void ShowHiddenCanvas()
     {
         if (myCanvas != null)
         {
-            myCanvas.SetActive(true);
+            Debug.Log("Activate Canvas");
+            myCanvas.gameObject.SetActive(true);
         }
         else
         {
             Debug.LogWarning("Canvas reference is missing!");
         }
 
-        Debug.Log("Hola");
     }
 }
