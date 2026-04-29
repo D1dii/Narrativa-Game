@@ -1,22 +1,23 @@
 ﻿title: Introduction
 ---
-Narrador: “Hay en nuestras sociedades enemigos muy espantosos, a saber: la especulación, el agio, la metalización del hombre culto, el negocio; pero sobre éstos descuella un monstruo que a la callada destroza más que ninguno: es la codicia del aldeano.” - Benito Pérez Galdós
+“Hay en nuestras sociedades enemigos muy espantosos, a saber; la especulación, el agio, la metalización del hombre culto, el negocio; pero sobre éstos descuella un monstruo que a la callada destroza más que ninguno. Este es la codicia del aldeano.” - Benito Pérez Galdós
 
 <<ShowImageOnScreen>>
 
-Mujer: Cuando digiste que era el ultimo dia para pagar la deuda?
-
+Mujer: Cuando dijiste que era el ultimo dia para pagar la deuda?
 Protagonista: Hoy...
-
-Mujer: I cuando venian a buscarla?
-
+Mujer: Y cuando venian a buscarla?
 Protagonista: Por la tarde...
-
 Mujer: Entonces? Que piensas hacer?
-
 Protagonista: Solo queda hacer una cosa...
 -> Ir a la mazmorra
     Mujer: Como?
+    Protagonista: No me queda otra, la pobreza nos persigue cariño, pero no me rindo facilmente
 -> Darme por vencido
     Mujer: Cobarde
+    Protagonista: Habló la valiente
+    Mujer: Un hombre de verdad haria lo que fuera por su familia, incluso aventurarse hacia una mazmorra peligrosa
+    Protagonista: El patriarcado te consume, mujer, lo muestras con cada comentario
+    Protagonista: Pero si, tienes razón... iré a la mazmorra y volveré con su tesoro
+Protagonista: Reuniré mi equipo y algunos recursos, tendré que ir rápido, antes de que lleguen esos perros del rei...
 ===
