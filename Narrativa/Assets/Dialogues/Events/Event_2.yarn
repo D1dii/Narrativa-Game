@@ -1,9 +1,25 @@
 ﻿title: Event_2
 ---
-This is the second event in the sequence!!
+Evento random 1
+A medida que avanzas por los pasillos de la mazmorra, el hedor a muerte se vuelve cada vez más insoportable. El suelo de piedra esta repleto de cadáveres aun recientes.
+De pronto, visulmbras a un pequeño ser encorbado saquendo uno de los cuerpos.
+Duende: ¡Vaya, vaya! Pensaba que ya no quedaban aventureros vivos por aquí... je, je, je.
+El escurridizo ser carga con un pesado saco que tintinea, repleto de baratijas.
+Duende: ¿Sabes qué? ¡Deberíamos celebrar este afortunado encuentro haciendo negocios! Tengo herramientas muy útiles que podrían interesarte. 
+Duende: ¿Qué me dices?
+-> Negociar
+    Duende: ¡Así me gusta, porfin alguien razonable! 
+    Duende: Acércate, ¿ves algo que te interese?
+-> Rechazar
+    Duende: Una verdadera lástima... Quizás nuestros caminos se vuelvan a cruzar. 
+    Duende: Y cuando eso ocurra, ya me encargaré de inspeccionar personalmente tu equipo... je, je, je.
+    El duende se escabulle entre las sombras sin perderte de vista.
+-> Atacar
+    Duende: ¿Pero qué te has creído?
+    Con un movimiento rápido, el duende desenvaina una daga oxidada y ensangrentada.
+    Duende: Si quieres mi botín, ¡tendrás que quitármelo de las manos, imbécil!
 
--> Hola bebe!
-    Narrator: Hola! Que tal?
--> Bleeeeh
-    Narrator: Tu puta madre
+<<set $nextEventName to NextEvent(1) >>
+
+<<jump {$nextEventName}>>
 ===
