@@ -8,6 +8,7 @@ public struct Cell
 {
     public int x;
     public int y;
+    public bool isOccupied;
 }
 
 public class GridEquipment : MonoBehaviour
@@ -15,7 +16,7 @@ public class GridEquipment : MonoBehaviour
     [SerializeField] private int rows;
     [SerializeField] private int columns;
 
-    [SerializeField] private Cell[,] cells;
+    public Cell[,] cells;
 
     [SerializeField] private GameObject cellImagePrefab;
 
@@ -40,6 +41,7 @@ public class GridEquipment : MonoBehaviour
                 cells[i, j] = new Cell();
                 cells[i, j].x = i;
                 cells[i, j].y = j;
+                cells[i, j].isOccupied = false;
                 DrawCell(i, j);
             }
         }
@@ -59,15 +61,49 @@ public class GridEquipment : MonoBehaviour
     public void PlaceObject(GameObject dragObject, CellInfo cellInfo)
     {
         dragObject.GetComponent<RectTransform>().localPosition = new Vector3(-145 + 70 * cellInfo.x, 115 - 70 * cellInfo.y, 0);
+
+        for (int i = 0; i < cellSlots.Count; i++)
+        {
+            var cellSlot = cellSlots[i].GetComponent<CellSlot>();
+            if (cellSlot.X >= cellInfo.x && cellSlot.X < cellInfo.x + cellInfo.width &&
+                cellSlot.Y >= cellInfo.y && cellSlot.Y < cellInfo.y + cellInfo.height)
+            {
+                cellSlot.IsOccupied = true;
+            }
+        }
+
+        ColorSelectedCells(cellInfo);
+
+        var item = dragObject.GetComponent<IBaseItem>();
+        InventoryManager.Instance.AddItem(item);
+
     }
 
-    public void ColorSelectedCells(CellInfo cellInfo, int width, int height)
+    public void UnPlaceObject(GameObject dragObject, CellInfo cellInfo)
     {
         for (int i = 0; i < cellSlots.Count; i++)
         {
             var cellSlot = cellSlots[i].GetComponent<CellSlot>();
-            if (cellSlot.X >= cellInfo.x && cellSlot.X < cellInfo.x + width &&
-                cellSlot.Y >= cellInfo.y && cellSlot.Y < cellInfo.y + height)
+            if (cellSlot.X >= cellInfo.x && cellSlot.X < cellInfo.x + cellInfo.width &&
+                cellSlot.Y >= cellInfo.y && cellSlot.Y < cellInfo.y + cellInfo.height)
+            {
+                cellSlot.IsOccupied = false;
+            }
+        }
+
+        ClearCellColors();
+
+        var item = dragObject.GetComponent<IBaseItem>();
+        InventoryManager.Instance.RemoveItem(item);
+    }
+
+    public void ColorSelectedCells(CellInfo cellInfo)
+    {
+        for (int i = 0; i < cellSlots.Count; i++)
+        {
+            var cellSlot = cellSlots[i].GetComponent<CellSlot>();
+            if (cellSlot.X >= cellInfo.x && cellSlot.X < cellInfo.x + cellInfo.width &&
+                cellSlot.Y >= cellInfo.y && cellSlot.Y < cellInfo.y + cellInfo.height)
             {
                 cellSlots[i].GetComponent<Image>().color = Color.green;
             }
@@ -75,6 +111,12 @@ public class GridEquipment : MonoBehaviour
             {
                 cellSlots[i].GetComponent<Image>().color = cellColor;
             }
+
+            if (cellSlot.IsOccupied)
+            {
+                cellSlots[i].GetComponent<Image>().color = Color.yellow;
+            }
+
         }
     }
 
@@ -83,6 +125,12 @@ public class GridEquipment : MonoBehaviour
         for (int i = 0; i < cellSlots.Count; i++)
         {
             cellSlots[i].GetComponent<Image>().color = cellColor;
+
+            var cellSlot = cellSlots[i].GetComponent<CellSlot>();
+            if (cellSlot.IsOccupied)
+            {
+                cellSlots[i].GetComponent<Image>().color = Color.yellow;
+            }
         }
     }
 }

@@ -8,10 +8,12 @@ public struct CellInfo
 {
     public int x;
     public int y;
+    public int width;
+    public int height;
     public GameObject go;
 }
 
-public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public abstract class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
     private RectTransform rectTransform;
@@ -23,16 +25,27 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     [SerializeField] private GridEquipment grid;
 
     private bool isDragging;
+    private bool isPlaced;
+
+    private CellInfo currentPlace = new CellInfo { x = -1, y = -1 };
+
+    private Vector2 originalPos;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
+        originalPos = rectTransform.anchoredPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         isDragging = true;
+
+        if (isPlaced)
+        {
+            UnPlaceObject(currentPlace);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -43,7 +56,7 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (bestOrigin.x != -1)
         {
-            grid.ColorSelectedCells(bestOrigin, width, height);
+            grid.ColorSelectedCells(bestOrigin);
         }
         else
         {
@@ -60,7 +73,13 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (bestOrigin.x != -1)
         {
-            PlaceObject(new CellInfo { x = bestOrigin.x, y = bestOrigin.y });
+            PlaceObject(new CellInfo { x = bestOrigin.x, y = bestOrigin.y, width = bestOrigin.width, height = bestOrigin.height});
+            currentPlace = bestOrigin;
+        }
+        else if (currentPlace.x != -1)
+        {
+            UnPlaceObject(currentPlace);
+            rectTransform.anchoredPosition = originalPos;
         }
     }
 
@@ -131,12 +150,19 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             }
         }
 
-        return found ? new CellInfo { x = bestOrigin.ox, y = bestOrigin.oy } : default;
+        return found ? new CellInfo { x = bestOrigin.ox, y = bestOrigin.oy, width = this.width, height = this.height } : default;
     }
 
     public void PlaceObject(CellInfo cellInfo)
     {
+        isPlaced = true;
         grid.PlaceObject(gameObject, cellInfo);
+    }
+
+    public void UnPlaceObject(CellInfo cellInfo)
+    {
+        isPlaced = false;
+        grid.UnPlaceObject(gameObject, cellInfo);
     }
 
     private List<CellInfo> GetOverlappedCells()
@@ -147,11 +173,16 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         foreach (var cell in gridRects)
         {
-            if (IsOverlapping(cell.GetComponent<RectTransform>()))
+            var rect = cell.GetComponent<RectTransform>();
+            if (IsOverlapping(rect))
             {
-                int x = cell.GetComponent<CellSlot>().X;
-                int y = cell.GetComponent<CellSlot>().Y;
-                result.Add(new CellInfo { x = x, y = y, go = cell });
+                var slot = cell.GetComponent<CellSlot>();
+                if (!slot.IsOccupied)
+                {
+                    int x = slot.X;
+                    int y = slot.Y;
+                    result.Add(new CellInfo { x = x, y = y, go = cell });
+                }
             }
         }
 
