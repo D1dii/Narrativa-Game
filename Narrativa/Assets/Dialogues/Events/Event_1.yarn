@@ -1,9 +1,43 @@
 ﻿title: Event_1
 ---
-This is an example of a sequence of events.
-
-Now we will jump to the next event in the sequence, which is random.
-
+Te detienes frente a la mazmorra. Imágenes de tu familia invaden tu mente, seguidas de las atrocidades que sufrirán si no regresas con la deuda saldada.
+Aprietas los dientes y te adentras.
+Avanzas por estancias tenuamente iluminadas por antorchas. El suelo está cubierto por sangre seca, mugre y ratas. Algo dentro de ti sabe que esto se convertirá en el pan de cada día.
+Poco después de entrar, notas un movimiento cerca de una montaña de basura.
+Una figura rebusca entre los restos. Al notar tu presencia, se detiene en seco y se gira.
+Es un hombre envuelto en harapos negros. Su rostro está desfigurado y su respiración rasposa te hiela la sangre. Sin embargo, extiende una mano temblorosa a modo de saludo.
+Hombre encapuchado: ¡Saludos, aventurero!
+Hombre encapuchado: Veo que también buscas las riquezas que esconde esta mazmorra... Has venido al lugar indicado, amigo mío.
+Hombre encapuchado: Aunque, si aceptas un consejo, no te adentres más. Sabes lo que anida en las profundidades, ¿verdad? Acabar calcinado por un lagarto escupefuego no entra en mis planes.
+Hombre encapuchado: He visto a muchos adentrarse, pero no a demasiados volver...
+Hombre encapuchado: Te recomiendo que te quedes cerca de la entrada. ¡Hay fortunas enteras ocultas entre la basura!
+Con manos torpes, el hombre saca un saquito de cuero del que asoman monedas y joyas.
+Hombre encapuchado: ¿Ves? Todo esto sin jugarme el pellejo.
+Lo observas detenidamente.
+Protagonista: Es un buen pellizco, pero con suerte cubre una cuarta fracción de la deuda que he de saldar. No me queda otra que seguir adelante.
+Hombre encapuchado: Es una lástima que decidas seguir...
+De pronto, un pensamiento oscuro cruza tu mente. El botín de este hombre no es suficiente para saldar tu deuda, pero acortaría drásticamente tu tiempo dentro de la mazmorra.
+-> Dejarlo ir
+    Te apartas para dejarle paso.
+    Hombre encapuchado: ¡Espera un momento! Yo me marcho ya, al fin he reunido lo justo para las medicinas de mi niña...
+    El hombre rebusca en su mochila y te ofrece un objeto.
+    Hombre encapuchado: Toma, te hará más falta que a mí.
+    ( Recibes una  Antorcha )
+    Hombre encapuchado: Mucha suerte. La vas a necesitar...
+    Con una sonrisa afable, el hombre cojea hacia la salida.
+-> Atacar
+    Te abalanzas sobre él.
+    Hombre encapuchado: ¡Aaaah! ¿Qué haces?
+    Comienzas a golpearle sin descanso.
+    Hombre encapuchado: ¡Detente, te lo ruego!
+    Tosiendo sangre, el hombre saca torpemente su saquito de joyas.
+    Hombre encapuchado: ¡Toma! ¡Llévate la mitad, pero déjame algo, no puedo volver sin nada!
+        -> Aceptar el trato
+            Le arrebatas las monedas de las manos. El hombre, llorando y cubierto de moretones, huye arrastrándose hacia la salida.
+        -> Seguir golpeando
+            Ignoras sus llantos y continúas golpeando. El sonido de tus puños resuena en la sala durante minutos...
+            El hombre deja de moverse.
+            Con la respiración agitada y las manos manchadas de sangre, recoges el saco de tesoros.
 <<declare $nextEventName = "name" >>
 <<set $nextEventName to NextEvent(1) >>
 
