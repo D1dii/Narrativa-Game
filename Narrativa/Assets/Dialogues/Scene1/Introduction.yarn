@@ -11,7 +11,7 @@ Protagonista: Por la tarde...
 Mujer: Entonces? Que piensas hacer?
 Protagonista: Solo queda hacer una cosa...
 -> Ir a la mazmorra
-    Mujer: Como?
+    Mujer: I dejarnos solos?
     Protagonista: No me queda otra, la pobreza nos persigue cariño, pero no me rindo facilmente
 -> Darme por vencido
     Mujer: Cobarde
@@ -19,6 +19,16 @@ Protagonista: Solo queda hacer una cosa...
     Mujer: Un hombre de verdad haria lo que fuera por su familia, incluso aventurarse hacia una mazmorra peligrosa
     Protagonista: El patriarcado te consume, mujer, lo muestras con cada comentario
     Protagonista: Pero si, tienes razón... iré a la mazmorra y volveré con su tesoro
+Hijo: Papá, porfavor... dejame acompanyarte.
+Protagonista: És muy peligroso hijo, mejor quedate y espera.
+Hijo: Ya tengo 14 años papá, en la epoca en la que vivimos es practicamente el punto medio de mi vida.
+Protagonista: Razón no le falta...
+-> Llevar a tu hijo
+    Hijo: No te arrepentiras Papá! 
+    Mujer: Esta familia está llena de majaras...
+-> Dejar que se quede
+    Hijo: Lo peor de la traición es que nunca viene de un enemigo...
+    Mujer: Será dramatico el niño.
 Protagonista: Reuniré mi equipo y algunos recursos, tendré que ir rápido, antes de que lleguen esos perros del rei...
 
 <<LoadEquipmentScene>>
