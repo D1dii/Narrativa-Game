@@ -19,7 +19,5 @@ Duende: ¿Qué me dices?
     Con un movimiento rápido, el duende desenvaina una daga oxidada y ensangrentada.
     Duende: Si quieres mi botín, ¡tendrás que quitármelo de las manos, imbécil!
 
-<<set $nextEventName to NextEvent(1) >>
 
-<<jump {$nextEventName}>>
 ===
