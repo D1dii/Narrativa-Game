@@ -1,5 +1,58 @@
 ﻿title: Event_3
 ---
-This is the 3 event in the sequence!!
+Sigues avanzando por los estrechos pasillos. Te da la sensación de que son interminables.
+De pronto, una voz te sorprende.
 
+//<<ShowSprite Duende_Oscuridad>>
+Duende: Bueno, bueno... ¿A quién tenemos aquí?
+Una voz familiar resuena desde la oscuridad.
+
+Duende: Pero si es el rácano que no me quiso comprar nada...
+
+Protagonista: No estaba interesado en nada, lo siento.
+
+Duende: Ah, no te preocupes... He encontrado a otros que sí que han apreciado mis servicios.
+Duende: Tanta suerte he tenido, que he agotado las existencias de mi tienda...
+
+El duende se acerca poco a poco. Una sonrisa maliciosa empieza a formarse en su rostro.
+//<<ShowSprite Duende_Armado>>
+
+Duende: Debería reponer mi inventario, no sé si me entiendes...
+El duende desenvaina una daga oxidada.
+
+Duende: ¡Prepárate a morir!
+
+-> Atacar
+   // Llamamos a tu función de C#. Le pasamos un 50, que significa un 50% de probabilidad de éxito.
+    <<if HasSuccess(60)>>
+        // Si la función devuelve 'true', saltamos al nodo de ganar.
+        <<jump Combate_Duende_Ganar>>
+    <<else>>
+        // Si devuelve 'false', saltamos al nodo de perder.
+        <<jump Combate_Duende_Perder>>
+    <<endif>>
+===
+
+title: Combate_Duende_Ganar
+---
+Logras esquivar sus ataques por los pelos, rápidamente lo inmovilizas y le atacas con todas tus fuerzas.
+El duende yace muerto en el suelo.
+No te lo piensas demasiado. Al final, eras tú o él.
+Saqueas el cuerpo en busca de algo de valor...
+
+( Recibes Oro )
+//<<HideSprite>>
+===
+
+title: Combate_Duende_Perder
+---
+El duende esquiva tu ataque inicial. Rápidamente te raja las piernas, haciendo que pierdas el equilibrio.
+Caes de rodillas. El duende te mira a los ojos y te corta el cuello.
+
+Duende: Buf, me sorprende que hayas llegado hasta aquí sin morir... Ahora veamos qué es lo que tienes, jejejeje.
+
+Te desangras en el frío suelo mientras el duende te roba.
+
+( Fin de la partida )
+//<<HideSprite>>
 ===
