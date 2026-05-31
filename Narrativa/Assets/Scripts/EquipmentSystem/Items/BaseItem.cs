@@ -8,7 +8,8 @@ public enum ItemType
     Bag,
     Bow,
     Bottle,
-    Dagger
+    Dagger,
+    Donkey
 
 }
 

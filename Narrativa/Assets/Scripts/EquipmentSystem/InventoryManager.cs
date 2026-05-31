@@ -42,6 +42,56 @@ public class InventoryManager : MonoBehaviour
         inventory.Remove(item);
     }
 
+    [YarnCommand("AddItem")]
+    public static void AddItem(string itemName)
+    {
+        
+        switch (itemName)
+        {
+            case "Sword":
+                var sword = new SwordItem();
+                Instance.AddItem(sword);
+                break;
+            case "Armor":
+                var armor = new ArmorItem();
+                Instance.AddItem(armor);
+                break;
+            case "Bag":
+                var bag = new BagItem();
+                Instance.AddItem(bag);
+                break;
+            case "Bow":
+                var bow = new BowItem();
+                Instance.AddItem(bow);
+                break;
+            case "Bottle":
+                var bottle = new BottleItem();
+                Instance.AddItem(bottle);
+                break;
+            case "Dagger":
+                var dagger = new DaggerItem();
+                Instance.AddItem(dagger);
+                break;
+            case "Donkey":
+                var donkey = new DonkeyItem();
+                Instance.AddItem(donkey);
+                break;
+        }
+    }
+
+    [YarnCommand("RemoveItem")]
+    public static void RemoveItem(string itemName)
+    {
+        foreach (var item in Instance.inventory)
+        {
+            if (item.Name == itemName)
+            {
+                Instance.RemoveItem(item);
+                break;
+            }
+        }
+    }
+
     [YarnFunction("GetFoodAmount")]
     public static int GetFoodAmount()
     {
