@@ -52,7 +52,7 @@ De pronto, un pensamiento oscuro cruza tu mente. El botín de este hombre no es 
                     <<ShowSprite 6>>
             El hombre deja de moverse.
             Con la respiración agitada y las manos manchadas de sangre, recoges el saco de tesoros.
-<<declare $nextEventName = "Evento_Salida_Hombre" >>
+<<declare $nextEventName = "Evento_Emboscada_Ladrones" >>
 
 <<jump {$nextEventName}>>
 ===

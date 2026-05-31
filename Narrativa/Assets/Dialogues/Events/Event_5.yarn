@@ -1,4 +1,81 @@
-﻿title: Event_5
+﻿title: Evento_Emboscada_Ladrones
 ---
-This is the 5 event in the sequence!!
+Avanzas por un pasillo húmedo y estrecho cuando escuchas unos quejidos débiles. 
+Al girar la esquina, ves a un hombre apoyado contra la pared, agarrándose la pierna con expresión de dolor.
+
+//<<ShowSprite Hombre_Herido>>
+Hombre herido: ¡Por los dioses, al fin alguien! Por favor, ayúdame... 
+Hombre herido: Hay una sala secreta justo aquí detrás con un cofre, pero hay una trampa y me he lastimado la pierna... 
+Hombre herido: Si me ayudas a abrirlo, compartiremos el oro. Te lo juro.
+
+-> Ayudar al hombre
+    A pesar de tus dudas, la promesa de riquezas te empuja a seguirlo por un callejón oscuro y sin salida.
+    Al llegar al fondo, te das cuenta de que no hay ningún cofre. 
+    De repente, la actitud del hombre cambia por completo. Se endereza, suelta una carcajada y silba.
+    <<jump Revelacion_Ladrones>>
+-> Desconfiar
+    Protagonista: No me fío un pelo de ti. Esto huele a trampa.
+    El hombre suspira, poniéndose de pie sin ningún rastro de cojera o dolor.
+    ¿Hombre herido?: Pfff... ¿Tanto se nota? Supongo que tendré que practicar más frente al espejo.
+    El hombre sonríe con malicia y suelta un silbido agudo.
+    <<jump Revelacion_Ladrones>>
+===
+
+title: Revelacion_Ladrones
+---
+<<ShowSprite Ladron_Jefe>>
+Dos figuras armadas emergen de las sombras a tus espaldas, bloqueando la única salida del pasillo.
+
+¿Hombre herido?: Bueno muchachos, ya sabéis lo que toca.
+El hombre que fingía estar herido saca un hacha de mano y te apunta con ella.
+Ladrón jefe: Te lo voy a poner fácil, aventurero: déjanos la mitad de tus tesoros y te dejaremos marchar con vida.
+Ladrón jefe: Por otro lado... bueno, somos tres contra uno. Tú decides.
+
+-> Entregar la mitad de los tesoros
+    Protagonista: No vale la pena morir por esto. Tomad el oro.
+    <<jump Rendirse_Ladrones>>
+-> Luchar
+    Protagonista: Vais a tener que arrancármelo de mis manos muertas.
+     <<if HasSuccess(30)>>
+        <<jump Combate_Ladrones_Ganar>>
+    <<else>>
+        <<jump Combate_Ladrones_Perder>>
+    <<endif>>
+    
+===
+
+title: Rendirse_Ladrones
+---
+Lanzas la mitad de tu botín al suelo con rabia contenida.
+Los ladrones se ríen mientras recogen las monedas apresuradamente.
+Ladrón jefe: Ha sido un placer hacer negocios contigo. ¡Y recuerda vigilar tus espaldas!
+Los tres bandidos retroceden perdiéndose en la oscuridad del pasillo, dejándote más pobre, pero con vida.
+Respiras hondo y continúas tu camino por la mazmorra.
+===
+
+title: Combate_Ladrones_Ganar
+---
+La pelea es brutal y caótica. Estás en desventaja numérica y el espacio es reducido.
+Esquivas un hachazo del líder, usas a uno de los compinches como escudo contra el otro y te abres paso a base de pura adrenalina.
+Tras unos eternos diez minutos, los tres ladrones yacen muertos formando un charco de sangre.
+Estás cubierto de cortes y magulladuras, pero sigues en pie.
+Registras los bolsillos de los bandidos, consiguiendo un buen botín que le seguramente habían robado a otros ingenuos.
+
+( Recibes Oro )
+Continúas tu camino, ahora mucho más alerta a los engaños de la mazmorra.
+===
+
+title: Combate_Ladrones_Perder
+---
+Luchas con todas tus fuerzas, pero el espacio reducido y la desventaja numérica juegan en tu contra.
+Logras herir a uno de los compinches, pero el líder te asesta un fuerte golpe por la espalda con el mango del hacha.
+
+Caes al suelo aturdido. Antes de que puedas reaccionar, sientes el frío acero perforando tu pecho.
+
+Ladrón jefe: Te había avisado... ahora asume las consecuencias.
+
+Mientras se nubla tu vista, ves a los bandidos saqueando todo tu equipo.
+Mueres solo en la oscuridad de la mazmorra.
+
+( Fin de la partida )
 ===
