@@ -25,4 +25,11 @@ public class EventManager
         return "Event_" + randomEvent;
     }
 
+    [YarnFunction("HasSuccess")]
+    public static bool HasSuccess(int percentageOfSuccess)
+    {
+        int randomValue = Random.Range(0, 100);
+        return randomValue < percentageOfSuccess;
+    }
+
 }

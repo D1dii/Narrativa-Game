@@ -3,8 +3,13 @@ using UnityEngine;
 public enum ItemType
 {
     Food,
-    Weapon,
+    Sword,
     Armor,
+    Bag,
+    Bow,
+    Bottle,
+    Dagger
+
 }
 
 public interface IBaseItem

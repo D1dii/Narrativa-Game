@@ -60,7 +60,15 @@ public class GridEquipment : MonoBehaviour
 
     public void PlaceObject(GameObject dragObject, CellInfo cellInfo)
     {
-        dragObject.GetComponent<RectTransform>().localPosition = new Vector3(-145 + 70 * cellInfo.x, 115 - 70 * cellInfo.y, 0);
+        float cellSize = 70f;
+        float originX = -180f;
+        float originY = 150f; 
+
+        float posX = originX + cellSize * cellInfo.x + cellSize * (cellInfo.width - 1) / 2f;
+        float posY = originY - cellSize * cellInfo.y - cellSize * (cellInfo.height - 1) / 2f;
+
+        dragObject.GetComponent<RectTransform>().localPosition = new Vector3(posX, posY, 0);
+
 
         for (int i = 0; i < cellSlots.Count; i++)
         {
