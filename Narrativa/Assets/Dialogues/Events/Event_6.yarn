@@ -47,7 +47,6 @@ Bajas tus armas. El miedo o una extraña fuerza mental te impide moverte.
 Los sectarios se acercan rápidamente, te amordazan y te colocan una pesada bolsa de tela negra en la cabeza.
 Sectario Líder: Excelente... El dragón estará complacido.
 Sientes cómo te arrastran durante lo que parecen horas por pasillos subterráneos, descendiendo cada vez más hacia el calor del subsuelo.
-<<jump Sala_Del_Dragon>>
 ===
 
 title: Combate_Sectarios_Ganar
