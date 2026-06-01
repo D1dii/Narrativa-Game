@@ -30,6 +30,7 @@ De pronto, un pensamiento oscuro cruza tu mente. El botín de este hombre no es 
     El hombre rebusca en su mochila y te ofrece un objeto.
     <<ShowSprite 7>>
     Hombre encapuchado: Toma, te hará más falta que a mí.
+    <<AddItem Dagger>>
     (Recibes una  Daga)
     <<ShowSprite 2>>
     Hombre encapuchado: Mucha suerte. La vas a necesitar...
@@ -46,13 +47,24 @@ De pronto, un pensamiento oscuro cruza tu mente. El botín de este hombre no es 
     Hombre encapuchado: ¡Toma! ¡Llévate la mitad, pero déjame algo, no puedo volver sin nada!
         -> Aceptar el trato
             <<ShowSprite 8>>
+            <<set $robaEncapuchado = true>>
             Le arrebatas las monedas de las manos. El hombre, llorando y cubierto de moretones, huye arrastrándose hacia la salida.
         -> Seguir golpeando
             Ignoras sus llantos y continúas golpeando. El sonido de tus puños resuena en la sala durante minutos...
                     <<ShowSprite 6>>
             El hombre deja de moverse.
             Con la respiración agitada y las manos manchadas de sangre, recoges el saco de tesoros.
-<<declare $nextEventName = "Evento_Emboscada_Ladrones" >>
 
-<<jump {$nextEventName}>>
+// --- NUEVO CÓDIGO DE TRANSICIÓN ---
+
+// 1. Sumas 1 a tu contador de eventos actual (asumiendo que tienes una variable así para controlar el progreso)
+<<set $eventoActual = $eventoActual + 1>>
+
+// 2. Llamas a tu EventManager de C#. 
+// NOTA: Ajusta el '5' por el número total de eventos que quieres que tenga una partida completa.
+// Pásale las variables que deciden si el duende o el hombre buscan venganza.
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+
+// 3. Saltas al evento que haya elegido el mánager
+<<jump {$siguiente_evento}>>
 ===

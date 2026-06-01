@@ -1,4 +1,4 @@
-﻿title: Encuentro_Cara_A_Cara_Dragon
+﻿title: Event_10
 ---
 El dragón se cierne sobre ti, su aliento caliente quema el aire y una chispa de fuego danza entre sus colmillos. 
 Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en este mismo instante.**
@@ -11,7 +11,6 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
     Dragón: Yo solo soy un autonomo maldito insulso, preparate para morir.
     Antes de que puedas dar un solo paso, una llamarada colosal e instantánea te envuelve por completo. Tu armadura se derrite y tu aventura termina aquí, convertido en un montón de ceniza.
     ( Fin de la partida )
-
 -> Intentar negociar y usar la elocuencia (50% de probabilidad)
     Protagonista: ¡Espera! ¡Gran señor de las escamas! Matarme no os reportará ningún beneficio. Puedo seros más útil vivo. ¡Puedo conseguiros más tesoros o cantar vuestras hazañas al mundo exterior!
     El dragón entrecierra los ojos, sopesando tus palabras. El fuego en sus fauces parece menguar por un segundo...
@@ -23,7 +22,6 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
         La bestia abre sus fauces y te devora de un solo bocado. La oscuridad te reclama.
         ( Fin de la partida )
     <<endif>>
-
 -> Ofrecerle tu burro de carga como tributo (100% de probabilidad)
     Protagonista: ¡Esperad! ¡Traigo una ofrenda de paz! Mirad fuera de la cueva... os entrego a mi burro. Está gordo, bien alimentado y os servirá de aperitivo.
     El dragón alza las cejas, sorprendido por la propuesta. Mira hacia la entrada de la guarida y ve al pobre animal rebuznando ajeno al peligro.
@@ -36,4 +34,9 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
 title: Sobrevive_Al_Dragon
 ---
 Con las piernas temblando por la adrenalina, logras alejarte de la zona de peligro. Has mirado a la muerte a los ojos y has salido para contarlo.
+// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+// (Si es el final del juego, cambia esto por tu pantalla de victoria)
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 ===

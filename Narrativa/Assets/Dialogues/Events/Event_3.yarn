@@ -1,57 +1,116 @@
 ﻿title: Event_3
 ---
-Sigues avanzando por los estrechos pasillos. Te da la sensación de que son interminables.
-De pronto, una voz te sorprende.
+Sigues avanzando por los estrechos pasillos. Te da la sensación de que son casi interminables.
+De repente, una voz te sorprende.
 
 //<<ShowSprite Duende_Oscuridad>>
-Duende: Bueno, bueno... ¿A quién tenemos aquí?
-Una voz familiar resuena desde la oscuridad.
+Duende: Vaya, vaya... ¿A quién tenemos aquí?
+Una voz muy familiar resuena desde la oscuridad.
 
-Duende: Pero si es el rácano que no me quiso comprar nada...
+Duende: Pero si es el mismo rácano que no me quiso comprar nada...
 
-Protagonista: No estaba interesado en nada, lo siento.
+Protagonista: No estaba interesado en tu mercancía, lo siento.
+Duende: Ah, no te preocupes por eso... He encontrado a otros que sí han apreciado mis servicios.
+Duende: Tanta suerte he tenido hoy, que he agotado todas las existencias de mi tienda...
 
-Duende: Ah, no te preocupes... He encontrado a otros que sí que han apreciado mis servicios.
-Duende: Tanta suerte he tenido, que he agotado las existencias de mi tienda...
-
-El duende se acerca poco a poco. Una sonrisa maliciosa empieza a formarse en su rostro.
+El duende se te acerca poco a poco.
+Una sonrisa perversa empieza a formarse en su rostro.
 //<<ShowSprite Duende_Armado>>
 
-Duende: Debería reponer mi inventario, no sé si me entiendes...
-El duende desenvaina una daga oxidada.
+Duende: Debería reponer ya mi inventario, no sé si me entiendes...
+El duende desenvaina lentamente una daga oxidada.
 
-Duende: ¡Prepárate a morir!
 
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if HasItem("Sword")>>
+    ( Arma equipada: Espada )
+<<elseif HasItem("Dagger")>>
+    ( Arma equipada: Daga )
+<<else>>
+    ( Arma equipada: Ninguna )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada: Sí )
+<<else>>
+    ( Armadura equipada: No )
+<<endif>>
+// -------------------------------
+Duende: ¡Prepárate para morir!
 -> Atacar
-   // Llamamos a tu función de C#. Le pasamos un 50, que significa un 50% de probabilidad de éxito.
-    <<if HasSuccess(60)>>
-        // Si la función devuelve 'true', saltamos al nodo de ganar.
+    // Asignamos una probabilidad base de éxito del 50%
+    <<set $probabilidad_ataque = 50>>
+    <<set $arma_usada = "Ninguna">>
+    
+    // COMPROBACIÓN DE ARMAS
+    <<if HasItem("Sword")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+        <<set $arma_usada = "Sword">>
+    <<elseif HasItem("Dagger")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+        <<set $arma_usada = "Dagger">>
+    <<endif>>
+    
+    // COMPROBACIÓN DE ARMADURA
+    <<if HasItem("Armor")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+    <<endif>>
+    
+    // Llamada a la función con el porcentaje total calculado
+    <<if HasSuccess($probabilidad_ataque)>>
         <<jump Combate_Duende_Ganar>>
     <<else>>
-        // Si devuelve 'false', saltamos al nodo de perder.
         <<jump Combate_Duende_Perder>>
     <<endif>>
 ===
 
 title: Combate_Duende_Ganar
 ---
-Logras esquivar sus ataques por los pelos, rápidamente lo inmovilizas y le atacas con todas tus fuerzas.
-El duende yace muerto en el suelo.
-No te lo piensas demasiado. Al final, eras tú o él.
-Saqueas el cuerpo en busca de algo de valor...
+Logras esquivar sus ataques por los pelos, lo inmovilizas rápidamente y le atacas con todas tus fuerzas.
+El escurridizo duende yace muerto en el suelo.
 
+// --- SISTEMA DE ROTURA DE ARMAS ---
+<<if $arma_usada != "Ninguna">>
+    <<if HasSuccess(25)>>
+        <<if $arma_usada == "Sword">>
+            <<RemoveItem "Sword">>
+            <<set $tieneEspada = false>>
+            ¡CRACK! El cráneo del duende era más duro de lo que parecía. Tu espada se ha hecho añicos.
+        <<elseif $arma_usada == "Dagger">>
+            <<RemoveItem "Dagger">>
+            <<set $tieneDaga = false>>
+            ¡CRACK! La hoja de tu daga se ha quedado atascada en un hueso y se ha partido al intentar sacarla.
+        <<endif>>
+    <<else>>
+        Limpias la sangre de tu arma. Por suerte, sigue intacta.
+    <<endif>>
+<<endif>>
+// ----------------------------------
+
+No te lo piensas mucho. Al final, eras tú o él.
+Saqueas el cadáver en busca de algo de valor...
+
+<<AddCoins 50>>
 ( Recibes Oro )
 //<<HideSprite>>
+
+    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+// (Este código se ejecutará si el jugador compra o rechaza)
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 ===
 
 title: Combate_Duende_Perder
 ---
-El duende esquiva tu ataque inicial. Rápidamente te raja las piernas, haciendo que pierdas el equilibrio.
-Caes de rodillas. El duende te mira a los ojos y te corta el cuello.
-
-Duende: Buf, me sorprende que hayas llegado hasta aquí sin morir... Ahora veamos qué es lo que tienes, jejejeje.
-
-Te desangras en el frío suelo mientras el duende te roba.
+El duende esquiva tu primer ataque.
+Rápidamente te hace un tajo en las piernas, haciendo que pierdas el equilibrio.
+Caes al suelo de rodillas.
+El duende te mira fijamente a los ojos y te corta el cuello.
+Duende: Buf, me sorprende bastante que hayas llegado hasta aquí sin morir... Ahora veamos qué es lo que tienes, jejejeje.
+Te desangras en el frío suelo de piedra mientras el duende te roba.
 
 ( Fin de la partida )
 //<<HideSprite>>

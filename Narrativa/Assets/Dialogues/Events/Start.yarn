@@ -1,0 +1,14 @@
+﻿title: StartGame
+---
+// --- INICIALIZACIÓN DE VARIABLES ---
+<<set $eventoActual = 1>>
+<<set $noCompra = false>>
+<<set $robaEncapuchado = false>>
+<<set $saqueo_dragon = false>>
+
+// Llamamos al mánager para que prepare la lista de aleatorios y nos devuelva el primero
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+
+// Saltamos automáticamente al evento (que será el Event_1)
+<<jump {$siguiente_evento}>>
+===

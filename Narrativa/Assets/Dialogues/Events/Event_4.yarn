@@ -1,23 +1,64 @@
-﻿title: Evento_Salida_Hombre
+﻿title: Event_4
 ---
 Por fin alcanzas la salida. La luz del sol te ciega por un instante, pero la recibes con un inmenso alivio.
 Al echar la vista atrás, repasas mentalmente los horrores y los extraños encuentros que dejas atrapados en la mazmorra.
 Sin embargo, mientras retomas el camino hacia el pueblo, un grito a tus espaldas te hiela la sangre.
+
 ???: ¡Eh, tú!
+
 Te giras lentamente.
+
 Hombre encapuchado: ¿Me recuerdas? Nos cruzamos ahí abajo.
 Hombre encapuchado: Me arrebataste lo único que tenía... No tienes ni idea de cuánto lo necesitaba.
 Hombre encapuchado: Mi familia DEPENDE de ese oro, y no pienso marcharme sin él.
+
 El hombre desenvaina una espada. Le tiembla ligeramente el pulso, pero su mirada es pura determinación.
+
+
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if HasItem("Sword")>>
+    ( Arma equipada: Espada )
+<<elseif HasItem("Dagger")>>
+    ( Arma equipada: Daga )
+<<else>>
+    ( Arma equipada: Ninguna )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada: Sí )
+<<else>>
+    ( Armadura equipada: No )
+<<endif>>
+// -------------------------------
 Hombre encapuchado: Es mi última advertencia.
 -> Atacar
     Protagonista: Ven a por él si tanto lo deseas.
-    <<if HasSuccess(40)>>
+    
+    // Asignamos la probabilidad base de éxito
+    <<set $probabilidad_ataque = 40>>
+    
+    // COMPROBACIÓN DE ARMAS
+    <<if HasItem("Sword")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+    <<elseif HasItem("Dagger")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+    <<endif>>
+    
+    // COMPROBACIÓN DE ARMADURA
+    <<if HasItem("Armor")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+    <<endif>>
+    
+    // Llamada a la función con el porcentaje total calculado
+    <<if HasSuccess($probabilidad_ataque)>>
         <<jump Combate_Hombre_Ganar>>
     <<else>>
         <<jump Combate_Hombre_Perder>>
     <<endif>>
--> Devolver el oro
+-> Devolver el oro (Tienes {GetPlayerCoins()} monedas) <<if GetPlayerCoins() >= 50>>
+    <<RemoveCoins 50>>
     <<jump Devolver_Oro_Hombre>>
 ===
 
@@ -25,6 +66,7 @@ title: Combate_Hombre_Ganar
 ---
 Os enfrentáis en un duelo desesperado. El choque de vuestras armas resuena en el bosque.
 Tras intercambiar varios golpes, notas cómo la respiración de tu rival se vuelve pesada y errática.
+
 Aprovechas un descuido, desvías su hoja y asestas un contraataque certero.
 El hombre cae de rodillas, malherido, clavando sus ojos en ti mientras se desangra.
 Sin decir una palabra, te das la vuelta y retomas el camino a casa.
@@ -35,13 +77,14 @@ title: Combate_Hombre_Perder
 Os enfrentáis en un duelo desesperado. El choque de vuestras armas resuena en el bosque.
 El agotamiento acumulado en la mazmorra pesa demasiado en tus músculos.
 Aunque el hombre parece frágil, la desesperación le da fuerzas. Logra romper tu defensa y conectar varios tajos.
-Un último impacto seco te hace perder el equilibrio y caes al suelo.
 
+Un último impacto seco te hace perder el equilibrio y caes al suelo.
 Sientes el frío acero de su espada presionando tu garganta.
 
 Hombre encapuchado: No sé tú, pero yo no soy un asesino.
 El hombre escupe a un lado, se agacha y recupera el saco de oro que le robaste.
 Hombre encapuchado: ¡Lárgate de mi vista, escoria!
+
 A regañadientes, te levantas cojeando y sigues tu camino, humillado y con las manos vacías.
 ===
 
@@ -49,10 +92,13 @@ title: Devolver_Oro_Hombre
 ---
 Protagonista: No hay por qué derramar más sangre.
 Protagonista: Al igual que tú, hice lo que hice por mi familia. Me juré que volvería con dinero costase lo que costase.
+
 Arrojas el saco de cuero a sus pies.
 Protagonista: Aquí tienes lo que te quité. Ni una moneda menos.
+
 El hombre recoge el saco lentamente, sin quitarte el ojo de encima ni bajar la guardia.
 Hombre encapuchado: No olvidaré esto.
+
 Con un movimiento seco, envaina su arma y desaparece entre la maleza del bosque.
 Tras el tenso encuentro, respiras hondo y sigues tu camino a casa.
 ===

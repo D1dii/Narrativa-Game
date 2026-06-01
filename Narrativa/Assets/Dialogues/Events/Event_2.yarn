@@ -1,35 +1,175 @@
 ﻿title: Event_2
 ---
-Evento random 1
-A medida que avanzas por los pasillos de la mazmorra, el hedor a muerte se vuelve cada vez más insoportable. El suelo de piedra está repleto de cadáveres aún recientes.
+A medida que avanzas por los pasillos de la mazmorra, el hedor a muerte se vuelve cada vez más insoportable.
+El suelo de piedra está repleto de cadáveres aún recientes.
 De pronto, vislumbras a un pequeño ser encorvado saqueando uno de los cuerpos.
+
 Duende: ¡Vaya, vaya! Pensaba que ya no quedaban aventureros vivos por aquí... je, je, je.
 El escurridizo ser carga con un pesado saco que tintinea, repleto de baratijas.
-Duende: ¿Sabes qué? ¡Deberíamos celebrar este afortunado encuentro haciendo negocios! Tengo herramientas muy útiles que podrían interesarte. 
+Duende: ¿Sabes qué? ¡Deberíamos celebrar este afortunado encuentro haciendo negocios! Tengo herramientas muy útiles que podrían interesarte.
 Duende: ¿Qué me dices?
+
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if HasItem("Sword")>>
+    ( Arma equipada Espada )
+<<elseif HasItem("Dagger")>>
+    ( Arma equipada Daga )
+<<else>>
+    ( Arma equipada Ninguna )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada Sí )
+<<else>>
+    ( Armadura equipada No )
+<<endif>>
+// -------------------------------
+
+Duende: Bueno, no tengo todo el día... ¿Hacemos trato o qué?
+
 -> Negociar
-    Duende: ¡Así me gusta, por fin alguien razonable! 
+    Duende: ¡Así me gusta, por fin alguien razonable!
     Duende: Piénsatelo bien, solo vendo un objeto por cliente.
     Duende: Acércate, ¿ves algo que te interese?
-    -> Arco
-        Duende: Un placer hacer negocios contigo.
-        El duende se escabulle entre las sombras sin perderte de vista.
-    -> Poción de agilidad
-        Duende: Un placer hacer negocios contigo.
-        El duende se escabulle entre las sombras sin perderte de vista.
-    -> Burro
-        Duende: Un placer hacer negocios contigo.
-        El duende se escabulle entre las sombras sin perderte de vista.
+    
+    -> Arco 50 monedas
+        <<if GetPlayerCoins() >= 50>>
+            <<AddItem "Bow">>
+            <<set $tieneArco = true>>
+            <<RemoveCoins 50>>
+            Duende: Un placer hacer negocios contigo.
+            El duende se escabulle entre las sombras sin perderte de vista.
+        <<else>>
+            Duende: ¿Intentas estafarme? ¡No tienes oro suficiente para esto!
+            El duende desaparece en la oscuridad indignado.
+        <<endif>>
+        <<jump Continuar_Mazmorra_Duende>>
+        
+    -> Burro 100 monedas
+       <<if GetPlayerCoins() >= 100>>
+            <<set $tieneBurro = true>>
+            <<RemoveCoins 100>>
+            Duende: Un placer hacer negocios contigo.
+            El duende se escabulle entre las sombras sin perderte de vista.
+        <<else>>
+            Duende: ¿Intentas estafarme? ¡No tienes oro suficiente para esto!
+            El duende desaparece en la oscuridad indignado.
+        <<endif>> 
+        <<jump Continuar_Mazmorra_Duende>>
+        
+    -> Pocion de ligereza 30 monedas
+       <<if GetPlayerCoins() >= 30>>
+            <<set $tienePocion = true>>
+            <<RemoveCoins 30>>
+            Duende: Un placer hacer negocios contigo.
+            El duende se escabulle entre las sombras sin perderte de vista.
+        <<else>>
+            Duende: ¿Intentas estafarme? ¡No tienes oro suficiente para esto!
+            El duende desaparece en la oscuridad indignado.
+        <<endif>>
+        <<jump Continuar_Mazmorra_Duende>>
+        
     -> Rechazar
-        Duende: Una verdadera lástima... Quizás nuestros caminos se vuelvan a cruzar. 
+        <<set $noCompra = true>>
+        Duende: Una verdadera lástima... Quizás nuestros caminos se vuelvan a cruzar.
         Duende: Y cuando eso ocurra, ya me encargaré de inspeccionar personalmente tu equipo... je, je, je.
         El duende se escabulle entre las sombras sin perderte de vista.
+        <<jump Continuar_Mazmorra_Duende>>
+        
 -> Rechazar
-    Duende: Una verdadera lástima... Quizás nuestros caminos se vuelvan a cruzar. 
+    <<set $noCompra = true>>
+    Duende: Una verdadera lástima... Quizás nuestros caminos se vuelvan a cruzar.
     Duende: Y cuando eso ocurra, ya me encargaré de inspeccionar personalmente tu equipo... je, je, je.
     El duende se escabulle entre las sombras sin perderte de vista.
+    <<jump Continuar_Mazmorra_Duende>>
+    
 -> Atacar
-    Duende: ¿Pero qué te has creído?
-    Con un movimiento rápido, el duende desenvaina una daga oxidada y ensangrentada.
-    Duende: Si quieres mi botín, ¡tendrás que quitármelo de las manos, imbécil!
+    <<jump Preparar_Combate_Duende>>
+===
+
+title: Preparar_Combate_Duende
+---
+Duende: ¿Pero qué te has creído?
+Con un movimiento rápido, el duende desenvaina una daga oxidada y ensangrentada.
+Duende: Si quieres mi botín, ¡tendrás que quitármelo de las manos, imbécil!
+
+// Asignamos una probabilidad base de éxito
+<<set $probabilidad_ataque = 40>>
+<<set $arma_usada = "Ninguna">>
+
+// COMPROBACIÓN DE ARMAS
+<<if HasItem("Sword")>>
+    <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+    <<set $arma_usada = "Sword">>
+<<elseif HasItem("Dagger")>>
+    <<set $probabilidad_ataque = $probabilidad_ataque + 100>>
+    <<set $arma_usada = "Dagger">>
+<<endif>>
+
+// COMPROBACIÓN DE ARMADURA
+<<if HasItem("Armor")>>
+    <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+<<endif>>
+
+// Llamamos a tu función con el porcentaje total calculado
+<<if HasSuccess($probabilidad_ataque)>>
+    <<jump Combate_Mercader_Ganar>>
+<<else>>
+    <<jump Combate_Mercader_Perder>>
+<<endif>>
+===
+
+title: Continuar_Mazmorra_Duende
+---
+// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
+===
+
+title: Combate_Mercader_Ganar
+---
+Te abalanzas sobre el escurridizo ser. A pesar de su agilidad, logras desarmarlo y asestarle un golpe letal.
+El duende cae al suelo, soltando su pesado saco.
+
+// Primero comprobamos si el jugador usó algún arma
+<<if $arma_usada != "Ninguna">>
+    // Calculamos el 25% de probabilidad de que se rompa
+    <<if HasSuccess(25)>>
+        // Si se rompe, miramos cuál era para borrar la correcta
+        <<if $arma_usada == "Sword">>
+            <<RemoveItem "Sword">>
+            <<set $tieneEspada = false>>
+            ¡CRACK! El impacto final contra la armadura del duende ha sido demasiado brusco. Tu espada se ha hecho añicos.
+        <<elseif $arma_usada == "Dagger">>
+            <<RemoveItem "Dagger">>
+            <<set $tieneDaga = false>>
+            ¡CRACK! El impacto final ha sido demasiado brusco. La hoja de tu daga se ha partido en dos.
+        <<endif>>
+    <<else>>
+        Limpias la sangre de vuestra arma. Por suerte, sigue intacta.
+    <<endif>>
+<<endif>>
+
+Sin perder tiempo, rebuscas entre sus pertenencias y saqueas algunas monedas.
+
+<<AddCoins 50>>
+( Recibes Oro )
+Satisfecho con el botín, sigues tu camino por la mazmorra.
+
+<<jump Continuar_Mazmorra_Duende>>
+===
+
+title: Combate_Mercader_Perder
+---
+El duende resulta ser mucho más rápido de lo que esperabas. Esquiva tu ataque con facilidad y te clava la daga en el costado.
+Caes al suelo retorciéndote de dolor.
+
+Duende: ¡Te lo advertí, estúpido! Nadie roba en mi tienda.
+El duende ríe a carcajadas, recoge su mercancía y desaparece en la oscuridad de los túneles.
+
+Mueres desangrado en el suelo.
+( Fin de la partida )
 ===

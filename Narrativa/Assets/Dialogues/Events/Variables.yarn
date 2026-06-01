@@ -1,0 +1,13 @@
+﻿title: Variables
+---
+// Declaración de inventario
+<<declare $tieneArco = false>>
+<<declare $tieneDaga = false>>
+<<declare $tieneEspada = false>>
+<<declare $tieneBurro = false>>
+<<declare $tienePocion = false>>
+
+// Declaración de decisiones y eventos pasados
+<<declare $noCompra = false>>
+<<declare $robaEncapuchado = false>>
+===

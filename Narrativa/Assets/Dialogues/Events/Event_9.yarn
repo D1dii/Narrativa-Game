@@ -1,4 +1,4 @@
-﻿title: Evento_Guarida_Dragon
+﻿title: Event_9
 ---
 Te adentras en la cámara más profunda del subsuelo. El aire aquí es sofocante, cargado de un intenso olor a azufre y ceniza. 
 Ante tus ojos se despliega un espectáculo imponente: una colosal montaña de monedas de oro, copas enjoyadas, armas legendarias y gemas que brillan con luz propia. Es la mítica guarida.
@@ -13,7 +13,6 @@ Ante tus ojos se despliega un espectáculo imponente: una colosal montaña de mo
     
     El tintineo de las monedas resonando en las paredes de piedra rompe el silencio de la caverna... un error fatal.
     <<jump Despertar_Dragon>>
-
 -> Avanzar con sigilo sin tocar el oro
     Sabes perfectamente que cada moneda en este lugar tiene dueño, y que un solo ruido podría sellar tu destino. 
     Ignoras el brillo dorado, tragas saliva y avanzas con extrema cautela entre los montones de tesoros, vigilando cada sombra y controlando tu respiración.
@@ -39,6 +38,9 @@ De entre las monedas y la oscuridad, una silueta colosal se yergue. Sus escamas,
 <<endif>>
 
 La batalla por la supervivencia comienza ahora.
-
+// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 
 ===

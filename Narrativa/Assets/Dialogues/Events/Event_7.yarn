@@ -1,6 +1,6 @@
-﻿title: Evento_Placa_Presion
+﻿title: Event_7
 ---
-El pasillo se ensancha ligeramente. Al dar un paso al frente, la luz de tu antorcha revela un sutil relieve en el suelo: una gran losa de piedra ligeramente elevada. Es una placa de presión.
+El pasillo se ensancha ligeramente. Al dar un paso al frente, la luz de tu antorcha revela un sutil relieve en el suelo; una gran losa de piedra ligeramente elevada. Es una placa de presión.
 Los muros a los lados están llenos de pequeños orificios oscuros, casi invisibles. Una trampa de dardos. El mecanismo bloquea todo el ancho del camino.
 
 <<if $tiene_hijo == true>>
@@ -23,20 +23,33 @@ Hijo: ¡Listo! Ya puedes pasar.
 Protagonista: Bien hecho chavalin.
 
 Continúas tu camino por la mazmorra.
+
+    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+// (Este código se ejecutará si el jugador compra o rechaza)
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 ===
 
 title: Placa_Presion_Solo
 ---
-Estás solo en la penumbra. Sabes que un paso en falso activará el mecanismo, pero no hay otra forma de avanzar por este sector de la mazmorra. No te queda más remedio que intentar cruzar con mucho cuidado.
+Estás solo en la penumbra. Sabes que un paso en falso activará el mecanismo, pero no hay otra forma de avanzar por este sector de la mazmorra. 
+No te queda más remedio que intentar cruzar con mucho cuidado.
 
 -> Intentar cruzar con cautela
     Respiras hondo, mides tus pasos e intentas pisar justo en el borde de la losa para no ejercer suficiente peso.
     <<if HasSuccess(50)>>
-        Un crujido resuena bajo tu bota, pero mantienes la calma y te impulsas rápidamente hacia el otro lado.
+        Un ligero crujido resuena bajo tu bota, pero mantienes la calma y te impulsas rápidamente hacia el otro lado.
         Por una fracción de segundo, la losa cede, pero el mecanismo no llega a dispararse. Estás a salvo.
         Sueltas el aire que contenías en los pulmones y continúas tu camino, con el corazón a mil por hora.
+        
+        // --- CÓDIGO DE TRANSICIÓN ---
+        <<set $eventoActual = $eventoActual + 1>>
+        <<set $siguiente_evento = NextEvent($eventoActual, 5, $noCompra, $robaEncapuchado)>>
+        <<jump {$siguiente_evento}>>
     <<else>>
-        Das un paso en falso. Un eco seco y metálico resuena en todo el pasillo: la placa se ha hundido por completo.
+        Das un paso en falso. Un eco seco y metálico resuena en todo el pasillo.
+        La placa se ha hundido por completo.
         Antes de que puedas reaccionar, un silbido ensordecedor inunda el aire.
         Decenas de dardos envenenados salen disparados de los muros, perforando tu armadura y tu carne en un instante.
         El veneno paraliza tus músculos de inmediato. Caes al suelo de rodillas, incapaz de respirar.

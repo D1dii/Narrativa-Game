@@ -1,4 +1,4 @@
-﻿title: Evento_Emboscada_Ladrones
+﻿title: Event_5
 ---
 Avanzas por un pasillo húmedo y estrecho cuando escuchas unos quejidos débiles. 
 Al girar la esquina, ves a un hombre apoyado contra la pared, agarrándose la pierna con expresión de dolor.
@@ -16,7 +16,7 @@ Hombre herido: Si me ayudas a abrirlo, compartiremos el oro. Te lo juro.
 -> Desconfiar
     Protagonista: No me fío un pelo de ti. Esto huele a trampa.
     El hombre suspira, poniéndose de pie sin ningún rastro de cojera o dolor.
-    ¿Hombre herido?: Pfff... ¿Tanto se nota? Supongo que tendré que practicar más frente al espejo.
+    Hombre herido: Pfff... ¿Tanto se nota? Supongo que tendré que practicar más frente al espejo.
     El hombre sonríe con malicia y suelta un silbido agudo.
     <<jump Revelacion_Ladrones>>
 ===
@@ -26,22 +26,59 @@ title: Revelacion_Ladrones
 <<ShowSprite Ladron_Jefe>>
 Dos figuras armadas emergen de las sombras a tus espaldas, bloqueando la única salida del pasillo.
 
-¿Hombre herido?: Bueno muchachos, ya sabéis lo que toca.
+Hombre herido: Bueno muchachos, ya sabéis lo que toca.
 El hombre que fingía estar herido saca un hacha de mano y te apunta con ella.
 Ladrón jefe: Te lo voy a poner fácil, aventurero: déjanos la mitad de tus tesoros y te dejaremos marchar con vida.
-Ladrón jefe: Por otro lado... bueno, somos tres contra uno. Tú decides.
 
+
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if HasItem("Sword")>>
+    ( Arma equipada Espada )
+<<elseif HasItem("Dagger")>>
+    ( Arma equipada Daga )
+<<else>>
+    ( Arma equipada Ninguna )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada Sí )
+<<else>>
+    ( Armadura equipada No )
+<<endif>>
+// -------------------------------
+Ladrón jefe: Por otro lado... bueno, somos tres contra uno. Tú decides.
 -> Entregar la mitad de los tesoros
     Protagonista: No vale la pena morir por esto. Tomad el oro.
     <<jump Rendirse_Ladrones>>
 -> Luchar
     Protagonista: Vais a tener que arrancármelo de mis manos muertas.
-     <<if HasSuccess(30)>>
+    
+    // Asignamos la probabilidad base de éxito (30% al ser tres contra uno)
+    <<set $probabilidad_ataque = 30>>
+    <<set $arma_usada = "Ninguna">>
+    
+    // COMPROBACIÓN DE ARMAS
+    <<if HasItem("Sword")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+        <<set $arma_usada = "Sword">>
+    <<elseif HasItem("Dagger")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+        <<set $arma_usada = "Dagger">>
+    <<endif>>
+    
+    // COMPROBACIÓN DE ARMADURA
+    <<if HasItem("Armor")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+    <<endif>>
+    
+    // Llamada a la función con la probabilidad calculada
+    <<if HasSuccess($probabilidad_ataque)>>
         <<jump Combate_Ladrones_Ganar>>
     <<else>>
         <<jump Combate_Ladrones_Perder>>
     <<endif>>
-    
 ===
 
 title: Rendirse_Ladrones
@@ -51,6 +88,11 @@ Los ladrones se ríen mientras recogen las monedas apresuradamente.
 Ladrón jefe: Ha sido un placer hacer negocios contigo. ¡Y recuerda vigilar tus espaldas!
 Los tres bandidos retroceden perdiéndose en la oscuridad del pasillo, dejándote más pobre, pero con vida.
 Respiras hondo y continúas tu camino por la mazmorra.
+    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+// (Este código se ejecutará si el jugador compra o rechaza)
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 ===
 
 title: Combate_Ladrones_Ganar
@@ -58,9 +100,34 @@ title: Combate_Ladrones_Ganar
 La pelea es brutal y caótica. Estás en desventaja numérica y el espacio es reducido.
 Esquivas un hachazo del líder, usas a uno de los compinches como escudo contra el otro y te abres paso a base de pura adrenalina.
 Tras unos eternos diez minutos, los tres ladrones yacen muertos formando un charco de sangre.
-Estás cubierto de cortes y magulladuras, pero sigues en pie.
-Registras los bolsillos de los bandidos, consiguiendo un buen botín que le seguramente habían robado a otros ingenuos.
 
+// --- SISTEMA DE ROTURA DE ARMAS ---
+<<if $arma_usada != "Ninguna">>
+    <<if HasSuccess(25)>>
+        <<if $arma_usada == "Sword">>
+            <<RemoveItem "Sword">>
+            <<set $tieneEspada = false>>
+            ¡CRACK! Uno de los ladrones ha bloqueado tu último tajo con su hacha. Tu espada se ha hecho añicos.
+        <<elseif $arma_usada == "Dagger">>
+            <<RemoveItem "Dagger">>
+            <<set $tieneDaga = false>>
+            ¡CRACK! La intensa refriega ha pasado factura. La hoja de tu daga se ha partido.
+        <<endif>>
+    <<else>>
+        Limpias la sangre de tu arma. Por suerte, sigue intacta.
+    <<endif>>
+<<endif>>
+    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+// (Este código se ejecutará si el jugador compra o rechaza)
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
+// ----------------------------------
+
+Estás cubierto de cortes y magulladuras, pero sigues en pie.
+Registras los bolsillos de los bandidos, consiguiendo un buen botín que seguramente habían robado a otros ingenuos.
+
+<<AddCoins 50>>
 ( Recibes Oro )
 Continúas tu camino, ahora mucho más alerta a los engaños de la mazmorra.
 ===

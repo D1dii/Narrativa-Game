@@ -1,4 +1,4 @@
-﻿title: Evento_Emboscada_Sectarios
+﻿title: Event_6
 ---
 Avanzas por un pasillo húmedo y estrecho cuando escuchas unos quejidos débiles. 
 Al girar la esquina, ves a un hombre apoyado contra la pared, vistiendo una túnica andrajosa y agarrándose la pierna con expresión de dolor.
@@ -11,7 +11,6 @@ Hombre herido: Si me ayudas a llegar al altar, podré curarme y compartir las of
 -> Ayudar al hombre
     Protagonista: De acuerdo, por una vez seré un buen samaritano.
     <<jump Revelacion_Sectarios>>
-
 -> Desconfiar
     Protagonista: No me fío un pelo de ti. Tus ropas y tus heridas huelen a trampa.
     El hombre suspira, poniéndose de pie sin ningún rastro de cojera o dolor, mientras una sonrisa mística dibuja su rostro.
@@ -47,6 +46,11 @@ Bajas tus armas. El miedo o una extraña fuerza mental te impide moverte.
 Los sectarios se acercan rápidamente, te amordazan y te colocan una pesada bolsa de tela negra en la cabeza.
 Sectario Líder: Excelente... El dragón estará complacido.
 Sientes cómo te arrastran durante lo que parecen horas por pasillos subterráneos, descendiendo cada vez más hacia el calor del subsuelo.
+    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+// (Este código se ejecutará si el jugador compra o rechaza)
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 ===
 
 title: Combate_Sectarios_Ganar
@@ -58,6 +62,11 @@ Estás cubierto de cortes, pero sigues libre. Registras sus túnicas y encuentra
 
 ( Recibes Oro )
 Continúas tu camino a toda prisa, sabiendo que el culto del dragón acecha en estas profundidades.
+    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+// (Este código se ejecutará si el jugador compra o rechaza)
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 ===
 
 title: Combate_Sectarios_Perder
