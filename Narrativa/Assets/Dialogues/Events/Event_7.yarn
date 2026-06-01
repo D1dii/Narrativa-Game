@@ -1,0 +1,46 @@
+﻿title: Evento_Placa_Presion
+---
+El pasillo se ensancha ligeramente. Al dar un paso al frente, la luz de tu antorcha revela un sutil relieve en el suelo: una gran losa de piedra ligeramente elevada. Es una placa de presión.
+Los muros a los lados están llenos de pequeños orificios oscuros, casi invisibles. Una trampa de dardos. El mecanismo bloquea todo el ancho del camino.
+
+<<if $tiene_hijo == true>>
+    <<jump Placa_Presion_Con_Hijo>>
+<<else>>
+    <<jump Placa_Presion_Solo>>
+<<endif>>
+===
+
+title: Placa_Presion_Con_Hijo
+---
+Hijo: ¡Espera! No pises ahí. Mira los agujeros de las paredes... es una trampa.
+Tu hijo, gracias a su menor tamaño y agilidad, observa el relieve con atención antes de que des el paso en falso.
+
+Protagonista: Tienes razón... Bien visto, hijo. ¿Crees que puedes pasar por el lateral?
+Hijo: Sí, el borde de la pared parece seguro. Déjame intentarlo.
+
+Con extremo cuidado, tu hijo se desliza pegado al muro, evitando la losa por completo. Al llegar al otro lado, introduce una pequeña cuña de piedra en el engranaje de la pared, desactivando el mecanismo por completo.
+Hijo: ¡Listo! Ya puedes pasar.
+Protagonista: Bien hecho chavalin.
+
+Continúas tu camino por la mazmorra.
+===
+
+title: Placa_Presion_Solo
+---
+Estás solo en la penumbra. Sabes que un paso en falso activará el mecanismo, pero no hay otra forma de avanzar por este sector de la mazmorra. No te queda más remedio que intentar cruzar con mucho cuidado.
+
+-> Intentar cruzar con cautela
+    Respiras hondo, mides tus pasos e intentas pisar justo en el borde de la losa para no ejercer suficiente peso.
+    <<if HasSuccess(50)>>
+        Un crujido resuena bajo tu bota, pero mantienes la calma y te impulsas rápidamente hacia el otro lado.
+        Por una fracción de segundo, la losa cede, pero el mecanismo no llega a dispararse. Estás a salvo.
+        Sueltas el aire que contenías en los pulmones y continúas tu camino, con el corazón a mil por hora.
+    <<else>>
+        Das un paso en falso. Un eco seco y metálico resuena en todo el pasillo: la placa se ha hundido por completo.
+        Antes de que puedas reaccionar, un silbido ensordecedor inunda el aire.
+        Decenas de dardos envenenados salen disparados de los muros, perforando tu armadura y tu carne en un instante.
+        El veneno paraliza tus músculos de inmediato. Caes al suelo de rodillas, incapaz de respirar.
+        La oscuridad de la mazmorra se traga tus últimos momentos de vida.
+        ( Fin de la partida )
+    <<endif>>
+===

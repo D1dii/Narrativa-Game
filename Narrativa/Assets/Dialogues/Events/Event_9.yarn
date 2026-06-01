@@ -1,0 +1,45 @@
+﻿title: Evento_Guarida_Dragon
+---
+Te adentras en la cámara más profunda del subsuelo. El aire aquí es sofocante, cargado de un intenso olor a azufre y ceniza. 
+Ante tus ojos se despliega un espectáculo imponente: una colosal montaña de monedas de oro, copas enjoyadas, armas legendarias y gemas que brillan con luz propia. Es la mítica guarida.
+
+¿Qué decides hacer?
+
+-> Saquear el tesoro del dragón
+    La tentación es demasiado grande. Te lanzas hacia la montaña de oro y comienzas a llenar tus bolsillos y tu mochila de forma frenética. 
+    Gemas preciosas, lingotes antiguos... es más riqueza de la que podrías gastar en diez vidas.
+    
+    ( ¡Has saqueado la guarida! Consigues +1000 de Oro )
+    
+    El tintineo de las monedas resonando en las paredes de piedra rompe el silencio de la caverna... un error fatal.
+    <<jump Despertar_Dragon>>
+
+-> Avanzar con sigilo sin tocar el oro
+    Sabes perfectamente que cada moneda en este lugar tiene dueño, y que un solo ruido podría sellar tu destino. 
+    Ignoras el brillo dorado, tragas saliva y avanzas con extrema cautela entre los montones de tesoros, vigilando cada sombra y controlando tu respiración.
+    
+    ( Decides no saquear. Mantienes el sigilo )
+    <<jump Despertar_Dragon>>
+===
+
+title: Despertar_Dragon
+---
+Un rugido sordo y vibrante hace que el suelo bajo tus pies tiemble. La enorme montaña de oro comienza a deslizarse como una avalancha.
+
+De entre las monedas y la oscuridad, una silueta colosal se yergue. Sus escamas, duras como el acero, reflejan los hilos de lava del techo. Unos ojos reptilescos de un amarillo ardiente se clavan directamente en ti.
+
+<<if $saqueo_dragon == true>>
+    El dragón baja su enorme cabeza, exhalando una ráfaga de humo negro por sus fosas nasales. Su mirada se posa en tu mochila, que casi revienta por el peso de sus pertenencias.
+    Dragón: **De nuevo con el allanamiento de morada, no ves que esto es un domicilio priva- Que haces con mi oro maldita cucaracha!? Te voy a hinchar a palos!**
+    El calor en la sala aumenta drásticamente mientras las fauces de la bestia comienzan a brillar con un fuego abrasador.
+<<else>>
+    La colosal bestia bosteza, liberando una nube de ceniza, y estira sus enormes alas membranosas. Aunque te mueves como una sombra, sus aguzados sentidos detectan tu presencia intrusa en su hogar.
+    Dragón: **Te huelo... que eres, otro rarito de esos con túnica? Ya os he dicho que no me interesa lo que vendais, tengo que esneñarte una lección?**
+    El monstruo bloquea la salida con su gigantesca cola, acorralándote.
+<<endif>>
+
+La batalla por la supervivencia comienza ahora.
+
+<<jump title: Encuentro_Cara_A_Cara_Dragon>>
+
+===

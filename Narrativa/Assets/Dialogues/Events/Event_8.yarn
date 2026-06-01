@@ -1,0 +1,29 @@
+﻿title: Evento_Sala_Saqueo
+---
+Llegas a una sala recien sacada de un cuento de hadas, solamente que mas tetrico... Parece que puede haber objetos valiosos.
+
+¿Qué decides hacer?
+
+-> Saquear la sala a fondo
+    No puedes dejar pasar una oportunidad así. Te tomas tu tiempo para revisar cada rincón, vaciar los cofres y guardar todo lo que brille en tu bolsa.
+    Encuentras monedas antiguas, un par de cálices de plata y algunos objetos de valor que sin duda podrás vender por una buena suma.
+    
+    ( Has saqueado la sala. Consigues +150 de Oro )
+    
+    Satisfecho con el botín, ajustas el peso de tu mochila y te preparas para continuar explorando.
+    <<jump Continuar_Mazmorra>>
+
+-> No arriesgarse y pasar de largo
+    Algo en la atmósfera de esta sala te da mala espina. En las mazmorras, la codicia suele pagarse cara, y prefieres no perder el tiempo ni exponerte a posibles trampas ocultas o maldiciones.
+    Decides ignorar los destellos dorados, mantienes la guardia alta y cruzas la sala directamente hacia la salida del otro lado.
+    
+    ( Decides no saquear. Tu inventario no cambia )
+    
+    Avanzas con paso firme, confiando en que mantenerte seguro es más importante que unas pocas monedas.
+    <<jump Continuar_Mazmorra>>
+===
+
+title: Continuar_Mazmorra
+---
+Dejas atrás la cámara y te adentras de nuevo en la fría oscuridad de los pasillos principales de la mazmorra...
+===
