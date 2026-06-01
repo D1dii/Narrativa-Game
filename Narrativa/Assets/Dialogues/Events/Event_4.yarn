@@ -82,7 +82,10 @@ Un último impacto seco te hace perder el equilibrio y caes al suelo.
 Sientes el frío acero de su espada presionando tu garganta.
 
 Hombre encapuchado: No sé tú, pero yo no soy un asesino.
-El hombre escupe a un lado, se agacha y recupera el saco de oro que le robaste.
+El hombre escupe a un lado, se agacha y te vacía los bolsillos.
+<<set $oro_perdido = GetPlayerCoins()>>
+<<RemoveCoins $oro_perdido>>
+( Pierdes todo tu oro: -$oro_perdido monedas )
 Hombre encapuchado: ¡Lárgate de mi vista, escoria!
 
 A regañadientes, te levantas cojeando y sigues tu camino, humillado y con las manos vacías.
