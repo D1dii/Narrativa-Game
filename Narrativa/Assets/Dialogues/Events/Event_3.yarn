@@ -1,43 +1,40 @@
 ﻿title: Event_3
 ---
+<<ShowSprite PasilloSinDuende>>
 Sigues avanzando por los estrechos pasillos. Te da la sensación de que son casi interminables.
 De repente, una voz te sorprende.
 
-//<<ShowSprite Duende_Oscuridad>>
-Duende: Vaya, vaya... ¿A quién tenemos aquí?
+<<ShowSprite DuendeAcechando>>
+???: Vaya, vaya... ¿A quién tenemos aquí?
 Una voz muy familiar resuena desde la oscuridad.
-
 Duende: Pero si es el mismo rácano que no me quiso comprar nada...
 
 Protagonista: No estaba interesado en tu mercancía, lo siento.
 Duende: Ah, no te preocupes por eso... He encontrado a otros que sí han apreciado mis servicios.
 Duende: Tanta suerte he tenido hoy, que he agotado todas las existencias de mi tienda...
 
-El duende se te acerca poco a poco.
-Una sonrisa perversa empieza a formarse en su rostro.
-//<<ShowSprite Duende_Armado>>
+Los ojos del duende no te pierden la vista.
 
 Duende: Debería reponer ya mi inventario, no sé si me entiendes...
-El duende desenvaina lentamente una daga oxidada.
-
 
 // --- INFORMACIÓN DEL JUGADOR ---
 ( Tienes {GetPlayerCoins()} monedas de oro )
 
 <<if HasItem("Sword")>>
-    ( Arma equipada: Espada )
+    ( Arma equipada Espada )
 <<elseif HasItem("Dagger")>>
-    ( Arma equipada: Daga )
+    ( Arma equipada Daga )
 <<else>>
-    ( Arma equipada: Ninguna )
+    ( Arma equipada Ninguna )
 <<endif>>
 
 <<if HasItem("Armor")>>
-    ( Armadura equipada: Sí )
+    ( Armadura equipada Sí )
 <<else>>
-    ( Armadura equipada: No )
+    ( Armadura equipada No )
 <<endif>>
 // -------------------------------
+<<ShowSprite DuendeAtaqueSorpresa>>
 Duende: ¡Prepárate para morir!
 -> Atacar
     // Asignamos una probabilidad base de éxito del 50%
@@ -69,6 +66,7 @@ Duende: ¡Prepárate para morir!
 title: Combate_Duende_Ganar
 ---
 Logras esquivar sus ataques por los pelos, lo inmovilizas rápidamente y le atacas con todas tus fuerzas.
+<<ShowSprite DuendeMuerto>>
 El escurridizo duende yace muerto en el suelo.
 
 // --- SISTEMA DE ROTURA DE ARMAS ---
@@ -109,6 +107,7 @@ El duende esquiva tu primer ataque.
 Rápidamente te hace un tajo en las piernas, haciendo que pierdas el equilibrio.
 Caes al suelo de rodillas.
 El duende te mira fijamente a los ojos y te corta el cuello.
+<<ShowSprite DuendeGana>>
 Duende: Buf, me sorprende bastante que hayas llegado hasta aquí sin morir... Ahora veamos qué es lo que tienes, jejejeje.
 Te desangras en el frío suelo de piedra mientras el duende te roba.
 

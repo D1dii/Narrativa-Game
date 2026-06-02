@@ -1,12 +1,15 @@
 ﻿title: Event_2
 ---
+<<ShowSprite SalaSinDuende>>
 A medida que avanzas por los pasillos de la mazmorra, el hedor a muerte se vuelve cada vez más insoportable.
 El suelo de piedra está repleto de cadáveres aún recientes.
+<<ShowSprite DuendeAsomandose>>
 De pronto, vislumbras a un pequeño ser encorvado saqueando uno de los cuerpos.
-
+<<ShowSprite DuendeHablando>>
 Duende: ¡Vaya, vaya! Pensaba que ya no quedaban aventureros vivos por aquí... je, je, je.
 El escurridizo ser carga con un pesado saco que tintinea, repleto de baratijas.
 Duende: ¿Sabes qué? ¡Deberíamos celebrar este afortunado encuentro haciendo negocios! Tengo herramientas muy útiles que podrían interesarte.
+<<ShowSprite DuendeTienda>>
 Duende: ¿Qué me dices?
 
 // --- INFORMACIÓN DEL JUGADOR ---
@@ -40,9 +43,12 @@ Duende: Bueno, no tengo todo el día... ¿Hacemos trato o qué?
             <<set $tieneArco = true>>
             <<RemoveCoins 50>>
             Duende: Un placer hacer negocios contigo.
+            <<ShowSprite SalaSinDuende>>
             El duende se escabulle entre las sombras sin perderte de vista.
         <<else>>
+            <<set $noCompra = true>>
             Duende: ¿Intentas estafarme? ¡No tienes oro suficiente para esto!
+            <<ShowSprite SalaSinDuende>>
             El duende desaparece en la oscuridad indignado.
         <<endif>>
         <<jump Continuar_Mazmorra_Duende>>
@@ -52,9 +58,12 @@ Duende: Bueno, no tengo todo el día... ¿Hacemos trato o qué?
             <<set $tieneBurro = true>>
             <<RemoveCoins 100>>
             Duende: Un placer hacer negocios contigo.
+            <<ShowSprite SalaSinDuende>>
             El duende se escabulle entre las sombras sin perderte de vista.
         <<else>>
+            <<set $noCompra = true>>
             Duende: ¿Intentas estafarme? ¡No tienes oro suficiente para esto!
+            <<ShowSprite SalaSinDuende>>
             El duende desaparece en la oscuridad indignado.
         <<endif>> 
         <<jump Continuar_Mazmorra_Duende>>
@@ -64,24 +73,31 @@ Duende: Bueno, no tengo todo el día... ¿Hacemos trato o qué?
             <<set $tienePocion = true>>
             <<RemoveCoins 30>>
             Duende: Un placer hacer negocios contigo.
+            <<ShowSprite SalaSinDuende>>
             El duende se escabulle entre las sombras sin perderte de vista.
         <<else>>
+            <<set $noCompra = true>>
             Duende: ¿Intentas estafarme? ¡No tienes oro suficiente para esto!
+            <<ShowSprite SalaSinDuende>>
             El duende desaparece en la oscuridad indignado.
         <<endif>>
         <<jump Continuar_Mazmorra_Duende>>
         
     -> Rechazar
         <<set $noCompra = true>>
+        <<ShowSprite DuendeHablando>>
         Duende: Una verdadera lástima... Quizás nuestros caminos se vuelvan a cruzar.
         Duende: Y cuando eso ocurra, ya me encargaré de inspeccionar personalmente tu equipo... je, je, je.
+        <<ShowSprite SalaSinDuende>>
         El duende se escabulle entre las sombras sin perderte de vista.
         <<jump Continuar_Mazmorra_Duende>>
         
 -> Rechazar
     <<set $noCompra = true>>
+    <<ShowSprite DuendeHablando>>
     Duende: Una verdadera lástima... Quizás nuestros caminos se vuelvan a cruzar.
     Duende: Y cuando eso ocurra, ya me encargaré de inspeccionar personalmente tu equipo... je, je, je.
+    <<ShowSprite SalaSinDuende>>
     El duende se escabulle entre las sombras sin perderte de vista.
     <<jump Continuar_Mazmorra_Duende>>
     
@@ -93,6 +109,7 @@ title: Preparar_Combate_Duende
 ---
 Duende: ¿Pero qué te has creído?
 Con un movimiento rápido, el duende desenvaina una daga oxidada y ensangrentada.
+<<ShowSprite DuendeConDaga>>
 Duende: Si quieres mi botín, ¡tendrás que quitármelo de las manos, imbécil!
 
 // Asignamos una probabilidad base de éxito
@@ -132,6 +149,7 @@ title: Continuar_Mazmorra_Duende
 title: Combate_Mercader_Ganar
 ---
 Te abalanzas sobre el escurridizo ser. A pesar de su agilidad, logras desarmarlo y asestarle un golpe letal.
+<<ShowSprite DuendeMuerto>>
 El duende cae al suelo, soltando su pesado saco.
 
 // Primero comprobamos si el jugador usó algún arma
@@ -166,7 +184,7 @@ title: Combate_Mercader_Perder
 ---
 El duende resulta ser mucho más rápido de lo que esperabas. Esquiva tu ataque con facilidad y te clava la daga en el costado.
 Caes al suelo retorciéndote de dolor.
-
+<<ShowSprite DuendeGana>>
 Duende: ¡Te lo advertí, estúpido! Nadie roba en mi tienda.
 El duende ríe a carcajadas, recoge su mercancía y desaparece en la oscuridad de los túneles.
 
