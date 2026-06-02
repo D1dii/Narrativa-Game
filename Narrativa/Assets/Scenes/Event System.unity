@@ -961,6 +961,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 98a28dc9207f6724db291d2487a57312, type: 3}
   - spriteName: TrampaSuperada
     sprite: {fileID: 21300000, guid: 94c344d695f21e34486018b8ecfc6477, type: 3}
+  - spriteName: SalaLlena
+    sprite: {fileID: 21300000, guid: c572ae4728c5c1149940a3c95987b8b6, type: 3}
+  - spriteName: SalaVacia
+    sprite: {fileID: 21300000, guid: 0449ca2339d1b4a478f4e2facbaa14ab, type: 3}
 --- !u!4 &1720068709
 Transform:
   m_ObjectHideFlags: 0
