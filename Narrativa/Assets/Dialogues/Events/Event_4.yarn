@@ -23,6 +23,8 @@ El hombre desenvaina una espada. Le tiembla ligeramente el pulso, pero su mirada
     ( Arma equipada Espada )
 <<elseif HasItem("Dagger")>>
     ( Arma equipada Daga )
+<<elseif HasItem("Bow")>>
+    ( Arma equipada Arco )
 <<else>>
     ( Arma equipada Ninguna )
 <<endif>>
@@ -45,6 +47,9 @@ Hombre encapuchado: Es mi última advertencia.
         <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
     <<elseif HasItem("Dagger")>>
         <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+    <<elseif HasItem("Bow")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+        <<set $arma_usada = "Bow">>
     <<endif>>
     
     // COMPROBACIÓN DE ARMADURA

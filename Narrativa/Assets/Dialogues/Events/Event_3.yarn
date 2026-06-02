@@ -24,6 +24,8 @@ Duende: Debería reponer ya mi inventario, no sé si me entiendes...
     ( Arma equipada Espada )
 <<elseif HasItem("Dagger")>>
     ( Arma equipada Daga )
+<<elseif HasItem("Bow")>>
+    ( Arma equipada Arco )
 <<else>>
     ( Arma equipada Ninguna )
 <<endif>>
@@ -48,6 +50,9 @@ Duende: ¡Prepárate para morir!
     <<elseif HasItem("Dagger")>>
         <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
         <<set $arma_usada = "Dagger">>
+    <<elseif HasItem("Bow")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+        <<set $arma_usada = "Bow">>
     <<endif>>
     
     // COMPROBACIÓN DE ARMADURA
