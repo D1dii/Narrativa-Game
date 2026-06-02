@@ -1,21 +1,21 @@
 ﻿title: Event_7
 ---
+<<ShowSprite Trampa>>
 El pasillo se ensancha ligeramente. Al dar un paso al frente, la luz de tu antorcha reveals un sutil relieve en el suelo; una gran losa de piedra ligeramente elevada. Es una placa de presión.
 Los muros a los lados están llenos de pequeños orificios oscuros, casi invisibles. Una trampa de dardos. El mecanismo bloquea todo el ancho del camino.
-
 // --- INFORMACIÓN DEL JUGADOR ---
 ( Tienes {GetPlayerCoins()} monedas de oro )
 
 <<if $tiene_hijo == true>>
-    ( Acompañante: Tu hijo )
+    ( Acompañante Tu hijo )
 <<else>>
-    ( Acompañante: Ninguno )
+    ( Acompañante Ninguno )
 <<endif>>
 
 <<if HasItem("Armor")>>
-    ( Armadura equipada: Sí )
+    ( Armadura equipada Sí )
 <<else>>
-    ( Armadura equipada: No )
+    ( Armadura equipada No )
     // Modificamos una variable local por si cae en la trampa
 <<endif>>
 // -------------------------------
@@ -34,8 +34,10 @@ Tu hijo, gracias a su menor tamaño y agilidad, observa el relieve con atención
 
 Protagonista: Tienes razón... Bien visto, hijo. ¿Crees que puedes pasar por el lateral?
 Hijo: Sí, el borde de la pared parece seguro. Déjame intentarlo.
-
-Con extremo cuidado, tu hijo se desliza pegado al muro, evitando la losa por completo. Al llegar al otro lado, introduce una pequeña cuña de piedra en el engranaje de la pared, desactivando el mecanismo por completo.
+<<ShowSprite TrampaNino>>
+Con extremo cuidado, tu hijo se desliza pegado al muro, evitando la losa por completo.
+<<ShowSprite TrampaDesactivada>>
+Al llegar al otro lado, introduce una pequeña cuña de piedra en el engranaje de la pared, desactivando el mecanismo por completo.
 Hijo: ¡Listo! Ya puedes pasar.
 Protagonista: Bien hecho chavalín.
 
@@ -60,6 +62,7 @@ No te queda más remedio que intentar cruzar con mucho cuidado.
     
     <<if HasSuccess($probabilidad_trampa)>>
         Un ligero crujido resuena bajo tu bota, pero mantienes la calma y te impulsas rápidamente hacia el otro lado.
+        <<ShowSprite TrampaSuperada>>
         Por una fracción de segundo, la losa cede, pero el mecanismo no llega a dispararse. Estás a salvo.
         Sueltas el aire que contenías en los pulmones y continúas tu camino, con el corazón a mil por hora.
         
@@ -70,6 +73,7 @@ No te queda más remedio que intentar cruzar con mucho cuidado.
     <<else>>
         Das un paso en falso. Un eco seco y metálico resuena en todo el pasillo.
         La placa se ha hundido por completo.
+        <<ShowSprite TrampaActivada>>
         Antes de que puedas reaccionar, un silbido ensordecedor inunda el aire y decenas de dardos salen disparados de los muros.
         
         <<if HasItem("Armor")>>
