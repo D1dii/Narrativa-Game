@@ -20,7 +20,7 @@ Los muros a los lados están llenos de pequeños orificios oscuros, casi invisib
 <<endif>>
 // -------------------------------
 
-<<if $tiene_hijo == true>>
+<<if $hijoAcompañante == true>>
     <<jump Placa_Presion_Con_Hijo>>
 <<else>>
     <<jump Placa_Presion_Solo>>
