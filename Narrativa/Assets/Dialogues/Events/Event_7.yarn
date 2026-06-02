@@ -87,6 +87,7 @@ No te queda más remedio que intentar cruzar con mucho cuidado.
             La oscuridad de la mazmorra se traga tus últimos momentos de vida.
             
             ( Fin de la partida )
+            <<LoadMenuScene>>
         <<endif>>
     <<endif>>
 ===

@@ -64,6 +64,7 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
         <<endif>>
         La bestia abre sus fauces y te devora de un solo bocado. La oscuridad te reclama.
         ( Fin de la partida )
+        <<LoadMenuScene>>
     <<endif>>
 -> Ofrecerle tu burro de carga como tributo <<if $tieneBurro == true>>
     Protagonista: ¡Esperad! ¡Traigo una ofrenda de paz! Mirad fuera de la cueva... os entrego a mi burro. Está gordo, bien alimentado y os servirá de aperitivo.

@@ -118,4 +118,6 @@ Te desangras en el frío suelo de piedra mientras el duende te roba.
 
 ( Fin de la partida )
 //<<HideSprite>>
+<<LoadMenuScene>>
+
 ===
