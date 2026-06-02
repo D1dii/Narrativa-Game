@@ -8,7 +8,7 @@ public class MenuUIManager : MonoBehaviour
     
     public void LoadFirstScene()
     {
-        SceneManager.LoadScene("InitialScene");
+        SceneManager.LoadScene("CinematicaInicial");
     }
 
 }

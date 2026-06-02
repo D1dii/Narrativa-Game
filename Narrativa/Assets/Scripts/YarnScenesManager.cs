@@ -16,5 +16,9 @@ public class YarnScenesManager : MonoBehaviour
     {
         SceneManager.LoadScene("MenuScene");
     }
-
+    [YarnCommand("CargarEscena")]
+    public void CargarEscena(string nombreDeLaEscena)
+    {
+        SceneManager.LoadScene(nombreDeLaEscena);
+    }
 }

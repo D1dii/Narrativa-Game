@@ -88,8 +88,47 @@ title: Sobrevive_Al_Dragon
 ---
 Con las piernas temblando por la adrenalina, logras alejarte de la zona de peligro. Has mirado a la muerte a los ojos y has salido para contarlo.
 
-// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
-<<set $eventoActual = $eventoActual + 1>>
-<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
-<<jump {$siguiente_evento}>>
+// --- NUEVO SISTEMA DE TRANSICIÓN ---
+<<if $robaEncapuchado == true>>
+    // Si le robaste al hombre, sigues la ruta programada que te llevará al Evento 4
+    <<set $eventoActual = $eventoActual + 1>>
+    <<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+    <<jump {$siguiente_evento}>>
+<<else>>
+    // Si NO le robaste, comprobamos el dinero y saltamos a un final
+    <<ShowSprite ExteriorMazmorra>>
+    <<if GetPlayerCoins() >= 100>>
+        <<jump Epilogo_Rico>>
+    <<elseif GetPlayerCoins() >= 50>>
+        <<jump Epilogo_Normal>>
+    <<else>>
+        <<jump Epilogo_Pobre>>
+    <<endif>>
+<<endif>>
+===
+
+title: Epilogo_Rico
+---
+Al salir de la cueva del dragón, el sol baña tu rostro. 
+Revisas tu bolsa y sonríes de oreja a oreja. ¡Llevas una fortuna encima!
+Con este oro, tu familia no volverá a pasar hambre nunca más. Has triunfado.
+( Fin de la Partida - Final Bueno )
+// Aquí llamamos a la cinemática
+<<CargarEscena "CinematicaVictoria">>
+===
+
+title: Epilogo_Normal
+---
+Al salir de la cueva del dragón, el sol baña tu rostro. 
+Cuentas las pocas monedas que tintinean en tu bolsa. No es una gran fortuna, pero será suficiente para sobrevivir el invierno.
+( Fin de la Partida - Final Normal )
+<<CargarEscena "CinematicaNormal">>
+===
+
+title: Epilogo_Pobre
+---
+Al salir de la cueva del dragón, el sol baña tu rostro.
+Te palpas los bolsillos completamente vacíos. Has sobrevivido a los horrores de la mazmorra, pero regresas a casa sin nada.
+( Fin de la Partida - Final Malo )
+<<CargarEscena "CinematicaDerrota">>
 ===

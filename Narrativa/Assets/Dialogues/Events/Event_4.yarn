@@ -77,6 +77,15 @@ Aprovechas un descuido, desvías su hoja y asestas un contraataque certero.
 <<ShowSprite HMMuerto>>
 El hombre cae malherido, clavando sus ojos en ti mientras se desangra.
 Sin decir una palabra, te das la vuelta y retomas el camino a casa.
+
+// --- EVALUACIÓN DEL FINAL ---
+<<if GetPlayerCoins() >= 100>>
+    <<jump Epilogo_Rico>>
+<<elseif GetPlayerCoins() >= 50>>
+    <<jump Epilogo_Normal>>
+<<else>>
+    <<jump Epilogo_Pobre>>
+<<endif>>
 ===
 
 title: Combate_Hombre_Perder
@@ -96,6 +105,14 @@ El hombre escupe a un lado, se agacha y te vacía los bolsillos.
 Hombre encapuchado: ¡Lárgate de mi vista, escoria!
 <<ShowSprite ExteriorMazmorra>>
 A regañadientes, te levantas cojeando y sigues tu camino, humillado y con las manos vacías.
+// --- EVALUACIÓN DEL FINAL ---
+<<if GetPlayerCoins() >= 100>>
+    <<jump Epilogo_Rico>>
+<<elseif GetPlayerCoins() >= 50>>
+    <<jump Epilogo_Normal>>
+<<else>>
+    <<jump Epilogo_Pobre>>
+<<endif>>
 ===
 
 title: Devolver_Oro_Hombre
@@ -111,4 +128,12 @@ Hombre encapuchado: No olvidaré esto.
 <<ShowSprite ExteriorMazmorra>>
 Con un movimiento seco, envaina su arma y desaparece entre la maleza del bosque.
 Tras el tenso encuentro, respiras hondo y sigues tu camino a casa.
+// --- EVALUACIÓN DEL FINAL ---
+<<if GetPlayerCoins() >= 100>>
+    <<jump Epilogo_Rico>>
+<<elseif GetPlayerCoins() >= 50>>
+    <<jump Epilogo_Normal>>
+<<else>>
+    <<jump Epilogo_Pobre>>
+<<endif>>
 ===
