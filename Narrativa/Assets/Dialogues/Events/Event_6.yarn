@@ -138,7 +138,6 @@ El mundo empieza a dar vueltas. Caes de rodillas, completamente aturdido.
 Antes de perder el conocimiento, escuchas los susurros de los sectarios flotando sobre ti.
 Sectario Líder: Llevadlo a la cámara inferior... El ritual debe comenzar.
 Todo se vuelve negro...
-<<LoadMenuScene>>
 
 // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO (Secuestro exitoso) ---
 <<set $eventoActual = $eventoActual + 1>>
