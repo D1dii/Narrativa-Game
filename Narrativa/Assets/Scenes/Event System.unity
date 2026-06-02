@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 653824678}
-  nodoInicial: Event_5
+  nodoInicial: StartGame
 --- !u!4 &1452965241
 Transform:
   m_ObjectHideFlags: 0

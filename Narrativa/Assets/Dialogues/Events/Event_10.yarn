@@ -7,21 +7,17 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
 ( Tienes {GetPlayerCoins()} monedas de oro )
 
 <<if HasItem("Sword")>>
-    ( Arma equipada: Espada )
+    ( Arma equipada Espada )
 <<elseif HasItem("Dagger")>>
-    ( Arma equipada: Daga )
+    ( Arma equipada Daga )
 <<else>>
-    ( Arma equipada: Ninguna )
+    ( Arma equipada Ninguna )
 <<endif>>
 
 <<if HasItem("Armor")>>
-    ( Armadura equipada: Sí )
+    ( Armadura equipada Sí )
 <<else>>
-    ( Armadura equipada: No )
-<<endif>>
-
-<<if $saqueo_dragon == true>>
-    ( ¡Llevas la mochila llena de su oro! )
+    ( Armadura equipada No )
 <<endif>>
 // -------------------------------
 
@@ -33,7 +29,6 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
     Dragón: Yo solo soy un autónomo maldito insulso, prepárate para morir.
     Antes de que puedas dar un solo paso, una llamarada colosal e instantánea te envuelve por completo. Tu armadura se derrite y tu aventura termina aquí, convertido en un montón de ceniza.
     ( Fin de la partida )
-
 -> Intentar negociar y usar la elocuencia
     Protagonista: ¡Espera! ¡Gran señor de las escamas! Matarme no os reportará ningún beneficio. Puedo seros más útil vivo. ¡Puedo conseguiros más tesoros o cantar vuestras hazañas al mundo exterior!
     
@@ -70,14 +65,13 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
         La bestia abre sus fauces y te devora de un solo bocado. La oscuridad te reclama.
         ( Fin de la partida )
     <<endif>>
-
--> Ofrecerle tu burro de carga como tributo
+-> Ofrecerle tu burro de carga como tributo <<if $tieneBurro == true>>
     Protagonista: ¡Esperad! ¡Traigo una ofrenda de paz! Mirad fuera de la cueva... os entrego a mi burro. Está gordo, bien alimentado y os servirá de aperitivo.
     El dragón alza las cejas, sorprendido por la propuesta. Mira hacia la entrada de la guarida y ve al pobre animal rebuznando ajeno al peligro.
     Burro: Que pasa guapo.
     Dragón: Hmmm, deja al burro y vete humano. Dime burro, ¿te gusta Shrek?
     
-    <<set $tiene_burro to false>>
+    <<set $tieneBurro to false>>
     <<jump Sobrevive_Al_Dragon>>
 ===
 

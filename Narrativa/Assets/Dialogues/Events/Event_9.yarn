@@ -5,19 +5,17 @@ Ante tus ojos se despliega un espectáculo imponente: una colosal montaña de mo
 
 // --- INFORMACIÓN DEL JUGADOR ---
 ( Tienes {GetPlayerCoins()} monedas de oro )
-
 <<if HasItem("Sword")>>
-    ( Arma equipada: Espada )
+    ( Arma equipada Espada )
 <<elseif HasItem("Dagger")>>
-    ( Arma equipada: Daga )
+    ( Arma equipada Daga )
 <<else>>
-    ( Arma equipada: Ninguna )
+    ( Arma equipada Ninguna )
 <<endif>>
-
 <<if HasItem("Armor")>>
-    ( Armadura equipada: Sí )
+    ( Armadura equipada Sí )
 <<else>>
-    ( Armadura equipada: No )
+    ( Armadura equipada No )
 <<endif>>
 // -------------------------------
 
@@ -33,7 +31,6 @@ Ante tus ojos se despliega un espectáculo imponente: una colosal montaña de mo
     
     El tintineo de las monedas resonando en las paredes de piedra rompe el silencio de la caverna... un error fatal.
     <<jump Despertar_Dragon>>
-
 -> Avanzar con sigilo sin tocar el oro
     Sabes perfectamente que cada moneda en este lugar tiene dueño, y que un solo ruido podría sellar tu destino. 
     Ignoras el brillo dorado, tragas saliva y avanzas con extrema cautela entre los montones de tesoros, vigilando cada sombra y controlando tu respiración.

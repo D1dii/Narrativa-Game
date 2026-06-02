@@ -10,4 +10,9 @@ public class YarnScenesManager : MonoBehaviour
         SceneManager.LoadScene("EquipmentScene");
     }
 
+    public static void LoadMenuScene()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
 }
