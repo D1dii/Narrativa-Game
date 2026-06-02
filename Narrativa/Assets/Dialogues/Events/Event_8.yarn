@@ -1,5 +1,6 @@
 ﻿title: Event_8
 ---
+<<ShowSprite SalaLlena>>
 Llegas a una sala recién sacada de un cuento de hadas, solamente que más tétrico... Parece que puede haber objetos valiosos, pero también pueden haber trampas...
 
 // --- INFORMACIÓN DEL JUGADOR ---
@@ -24,6 +25,7 @@ Llegas a una sala recién sacada de un cuento de hadas, solamente que más tétr
 
 -> Saquear la sala a fondo
     No puedes dejar pasar una oportunidad así. Te tomas tu tiempo para revisar cada rincón, vaciar los cofres y guardar todo lo que brille en tu bolsa.
+    <<ShowSprite SalaVacia>>
     Encuentras monedas antiguas, un par de cálices de plata y algunos objetos de valor que sin duda podrás vender por una buena suma.
     
     <<AddCoins 150>>

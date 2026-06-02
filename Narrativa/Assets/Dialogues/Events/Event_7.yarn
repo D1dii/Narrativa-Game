@@ -6,7 +6,7 @@ Los muros a los lados están llenos de pequeños orificios oscuros, casi invisib
 // --- INFORMACIÓN DEL JUGADOR ---
 ( Tienes {GetPlayerCoins()} monedas de oro )
 
-<<if $tiene_hijo == true>>
+<<if $hijoAcompañante == true>>
     ( Acompañante Tu hijo )
 <<else>>
     ( Acompañante Ninguno )
