@@ -1,5 +1,6 @@
 ﻿title: Event_10
 ---
+<<ShowSprite DragonHabla>>
 El dragón se cierne sobre ti, su aliento caliente quema el aire y una chispa de fuego danza entre sus colmillos. 
 Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en este mismo instante.**
 
@@ -25,8 +26,10 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
 
 -> Desafiar al dragón y amenazarlo con tu arma
     Protagonista: ¡No te tengo miedo, lagartija gigante! ¡He venido a acabar con tu reinado de terror!
+    <<ShowSprite DragonAtaque>>
     El dragón ni siquiera parpadea. Una fría y estruendosa carcajada retumba en la caverna.
     Dragón: Yo solo soy un autónomo maldito insulso, prepárate para morir.
+    <<ShowSprite DragonMata>>
     Antes de que puedas dar un solo paso, una llamarada colosal e instantánea te envuelve por completo. Tu armadura se derrite y tu aventura termina aquí, convertido en un montón de ceniza.
     ( Fin de la partida )
     <<LoadMenuScene>>
@@ -56,19 +59,23 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
     
     <<if HasSuccess($probabilidad_persuasion)>>
         Dragón: Que patético eres hombre, anda, vete y no vuelvas. Me das pena.
+        <<ShowSprite DragonPerdona>>
         <<jump Sobrevive_Al_Dragon>>
     <<else>>
         <<if $saqueo_dragon == true>>
             Dragón: ¿Encima de que me robas el oro intentas camelarme? A la cazuela.
+            <<ShowSprite DragonAtaque>>
         <<else>>
             Dragón: Creo que le haré un favor a tu familia con lo que voy a hacer ahora.
         <<endif>>
+        <<ShowSprite DragonAtaque>>
         La bestia abre sus fauces y te devora de un solo bocado. La oscuridad te reclama.
         ( Fin de la partida )
         <<LoadMenuScene>>
     <<endif>>
 -> Ofrecerle tu burro de carga como tributo <<if $tieneBurro == true>>
     Protagonista: ¡Esperad! ¡Traigo una ofrenda de paz! Mirad fuera de la cueva... os entrego a mi burro. Está gordo, bien alimentado y os servirá de aperitivo.
+    <<ShowSprite DragonBurro>>
     El dragón alza las cejas, sorprendido por la propuesta. Mira hacia la entrada de la guarida y ve al pobre animal rebuznando ajeno al peligro.
     Burro: Que pasa guapo.
     Dragón: Hmmm, deja al burro y vete humano. Dime burro, ¿te gusta Shrek?
