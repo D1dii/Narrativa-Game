@@ -37,7 +37,7 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
     Protagonista: ¡Espera! ¡Gran señor de las escamas! Matarme no os reportará ningún beneficio. Puedo seros más útil vivo. ¡Puedo conseguiros más tesoros o cantar vuestras hazañas al mundo exterior!
     
     // Asignamos la probabilidad base (50%)
-    <<set $probabilidad_persuasion = 50>>
+    <<set $probabilidad_persuasion = 70>>
     
     // MODIFICADORES POR EQUIPO
     <<if HasItem("Sword")>>
