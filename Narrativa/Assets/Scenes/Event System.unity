@@ -965,6 +965,22 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: c572ae4728c5c1149940a3c95987b8b6, type: 3}
   - spriteName: SalaVacia
     sprite: {fileID: 21300000, guid: 0449ca2339d1b4a478f4e2facbaa14ab, type: 3}
+  - spriteName: SalaDragon
+    sprite: {fileID: 21300000, guid: e1475a61aa228a749bfd54e4b624ef77, type: 3}
+  - spriteName: Dragon
+    sprite: {fileID: 21300000, guid: 39aa14d882f309241852b81904426578, type: 3}
+  - spriteName: DragonEnfadado
+    sprite: {fileID: 21300000, guid: 1f143e07d0781ce49b0b1e0ad93058a3, type: 3}
+  - spriteName: DragonMata
+    sprite: {fileID: 21300000, guid: daecde63f15e207448990a052f7062cd, type: 3}
+  - spriteName: DragonAtaque
+    sprite: {fileID: 21300000, guid: 5e36f8684cf3cea499f4dd13e0e4b90b, type: 3}
+  - spriteName: DragonHabla
+    sprite: {fileID: 21300000, guid: 800c71bf42732514eb671290728622e5, type: 3}
+  - spriteName: DragonPerdona
+    sprite: {fileID: 21300000, guid: dc139c49dd7388c4ea701421c6acf83e, type: 3}
+  - spriteName: DragonBurro
+    sprite: {fileID: 21300000, guid: 161680dbbb0302445aa1fc5d90289264, type: 3}
 --- !u!4 &1720068709
 Transform:
   m_ObjectHideFlags: 0

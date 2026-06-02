@@ -1,5 +1,6 @@
 ﻿title: Event_9
 ---
+<<ShowSprite SalaDragon>>
 Te adentras en la cámara más profunda del subsuelo. El aire aquí es sofocante, cargado de un intenso olor a azufre y ceniza. 
 Ante tus ojos se despliega un espectáculo imponente: una colosal montaña de monedas de oro, copas enjoyadas, armas legendarias y gemas que brillan con luz propia. Es la mítica guarida.
 
@@ -43,7 +44,7 @@ Ante tus ojos se despliega un espectáculo imponente: una colosal montaña de mo
 title: Despertar_Dragon
 ---
 Un rugido sordo y vibrante hace que el suelo bajo tus pies tiemble. La enorme montaña de oro comienza a deslizarse como una avalancha.
-
+<<ShowSprite Dragon>>
 De entre las monedas y la oscuridad, una silueta colosal se yergue. Sus escamas, duras como el acero, reflejan los hilos de lava del techo. Unos ojos reptilescos de un amarillo ardiente se clavan directamente en ti.
 
 <<if $saqueo_dragon == true>>
@@ -54,7 +55,7 @@ De entre las monedas y la oscuridad, una silueta colosal se yergue. Sus escamas,
     Dragón: **Te huelo... que eres, otro rarito de esos con túnica? Ya os he dicho que no me interesa lo que vendais, tengo que esneñarte una lección?**
     El monstruo bloquea la salida con su gigantesca cola, acorralándote.
 <<endif>>
-
+<<ShowSprite DragonEnfadado>>
 La batalla por la supervivencia comienza ahora.
 
 // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
