@@ -3,30 +3,80 @@
 El dragón se cierne sobre ti, su aliento caliente quema el aire y una chispa de fuego danza entre sus colmillos. 
 Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en este mismo instante.**
 
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if HasItem("Sword")>>
+    ( Arma equipada: Espada )
+<<elseif HasItem("Dagger")>>
+    ( Arma equipada: Daga )
+<<else>>
+    ( Arma equipada: Ninguna )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada: Sí )
+<<else>>
+    ( Armadura equipada: No )
+<<endif>>
+
+<<if $saqueo_dragon == true>>
+    ( ¡Llevas la mochila llena de su oro! )
+<<endif>>
+// -------------------------------
+
 ¿Cómo respondes ante la bestia?
 
 -> Desafiar al dragón y amenazarlo con tu arma
     Protagonista: ¡No te tengo miedo, lagartija gigante! ¡He venido a acabar con tu reinado de terror!
     El dragón ni siquiera parpadea. Una fría y estruendosa carcajada retumba en la caverna.
-    Dragón: Yo solo soy un autonomo maldito insulso, preparate para morir.
+    Dragón: Yo solo soy un autónomo maldito insulso, prepárate para morir.
     Antes de que puedas dar un solo paso, una llamarada colosal e instantánea te envuelve por completo. Tu armadura se derrite y tu aventura termina aquí, convertido en un montón de ceniza.
     ( Fin de la partida )
--> Intentar negociar y usar la elocuencia (50% de probabilidad)
+
+-> Intentar negociar y usar la elocuencia
     Protagonista: ¡Espera! ¡Gran señor de las escamas! Matarme no os reportará ningún beneficio. Puedo seros más útil vivo. ¡Puedo conseguiros más tesoros o cantar vuestras hazañas al mundo exterior!
+    
+    // Asignamos la probabilidad base (50%)
+    <<set $probabilidad_persuasion = 50>>
+    
+    // MODIFICADORES POR EQUIPO
+    <<if HasItem("Sword")>>
+        <<set $probabilidad_persuasion = $probabilidad_persuasion + 10>>
+    <<elseif HasItem("Dagger")>>
+        <<set $probabilidad_persuasion = $probabilidad_persuasion + 5>>
+    <<endif>>
+    
+    <<if HasItem("Armor")>>
+        <<set $probabilidad_persuasion = $probabilidad_persuasion + 15>>
+    <<endif>>
+    
+    // PENALIZADOR POR AVARICIA (Si le robaste el oro, se vuelve casi imposible)
+    <<if $saqueo_dragon == true>>
+        <<set $probabilidad_persuasion = $probabilidad_persuasion - 40>>
+    <<endif>>
+    
     El dragón entrecierra los ojos, sopesando tus palabras. El fuego en sus fauces parece menguar por un segundo...
-    <<if HasSuccess(50)>>
-        Dragón: Que patetico eres hombre, anda, vete y no vuelvas. Me das pena.
+    
+    <<if HasSuccess($probabilidad_persuasion)>>
+        Dragón: Que patético eres hombre, anda, vete y no vuelvas. Me das pena.
         <<jump Sobrevive_Al_Dragon>>
     <<else>>
-        Dragón: Creo que le haré un favor a tu familia con lo que voy a hacer ahora.
+        <<if $saqueo_dragon == true>>
+            Dragón: ¿Encima de que me robas el oro intentas camelarme? A la cazuela.
+        <<else>>
+            Dragón: Creo que le haré un favor a tu familia con lo que voy a hacer ahora.
+        <<endif>>
         La bestia abre sus fauces y te devora de un solo bocado. La oscuridad te reclama.
         ( Fin de la partida )
     <<endif>>
--> Ofrecerle tu burro de carga como tributo (100% de probabilidad)
+
+-> Ofrecerle tu burro de carga como tributo
     Protagonista: ¡Esperad! ¡Traigo una ofrenda de paz! Mirad fuera de la cueva... os entrego a mi burro. Está gordo, bien alimentado y os servirá de aperitivo.
     El dragón alza las cejas, sorprendido por la propuesta. Mira hacia la entrada de la guarida y ve al pobre animal rebuznando ajeno al peligro.
     Burro: Que pasa guapo.
-    Dragón: Hmmm, deja al burro y vete humano. Dime burro, te gusta Shrek?
+    Dragón: Hmmm, deja al burro y vete humano. Dime burro, ¿te gusta Shrek?
+    
     <<set $tiene_burro to false>>
     <<jump Sobrevive_Al_Dragon>>
 ===
@@ -34,8 +84,8 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
 title: Sobrevive_Al_Dragon
 ---
 Con las piernas temblando por la adrenalina, logras alejarte de la zona de peligro. Has mirado a la muerte a los ojos y has salido para contarlo.
+
 // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
-// (Si es el final del juego, cambia esto por tu pantalla de victoria)
 <<set $eventoActual = $eventoActual + 1>>
 <<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
 <<jump {$siguiente_evento}>>

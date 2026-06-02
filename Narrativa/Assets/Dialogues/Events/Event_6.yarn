@@ -10,6 +10,8 @@ Hombre herido: Si me ayudas a llegar al altar, podré curarme y compartir las of
 
 -> Ayudar al hombre
     Protagonista: De acuerdo, por una vez seré un buen samaritano.
+    A pesar de tus dudas, guías al hombre por un pasadizo oscuro que se desvía del camino principal.
+    Al llegar al fondo, notas que las paredes están grabadas con runas extrañas. De repente, los quejidos del hombre cesan. Se endereza lentamente y deja escapar una risa fría y fanática.
     <<jump Revelacion_Sectarios>>
 -> Desconfiar
     Protagonista: No me fío un pelo de ti. Tus ropas y tus heridas huelen a trampa.
@@ -28,12 +30,50 @@ Dos figuras encapuchadas, portando dagas rituales y relucientes, emergen de las 
 El líder de la secta da un paso al frente, sus ojos brillan con un misticismo peligroso debajo de la capucha.
 Sectario Líder: No opongas resistencia, mortal. Tu carne y tu sangre servirán para despertar al devorador de mundos. Entrégate voluntariamente y tu transición será indolora.
 
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if HasItem("Sword")>>
+    ( Arma equipada: Espada )
+<<elseif HasItem("Dagger")>>
+    ( Arma equipada: Daga )
+<<else>>
+    ( Arma equipada: Ninguna )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada: Sí )
+<<else>>
+    ( Armadura equipada: No )
+<<endif>>
+// -------------------------------
+
 -> Entregarse al destino
     Protagonista: (Estás paralizado por el miedo o el misticismo) No... no puedo luchar contra esto...
     <<jump Secuestro_Sectarios>>
 -> Luchar por tu vida
     Protagonista: ¡No seré el alimento de ninguna lagartija sobredimensionada! ¡Atrás!
-    <<if HasSuccess(30)>>
+    
+    // Asignamos la probabilidad base de éxito (30%)
+    <<set $probabilidad_ataque = 30>>
+    <<set $arma_usada = "Ninguna">>
+    
+    // COMPROBACIÓN DE ARMAS
+    <<if HasItem("Sword")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+        <<set $arma_usada = "Sword">>
+    <<elseif HasItem("Dagger")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+        <<set $arma_usada = "Dagger">>
+    <<endif>>
+    
+    // COMPROBACIÓN DE ARMADURA
+    <<if HasItem("Armor")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
+    <<endif>>
+    
+    // Llamada a la función con el porcentaje total calculado
+    <<if HasSuccess($probabilidad_ataque)>>
         <<jump Combate_Sectarios_Ganar>>
     <<else>>
         <<jump Combate_Sectarios_Perder>>
@@ -46,8 +86,8 @@ Bajas tus armas. El miedo o una extraña fuerza mental te impide moverte.
 Los sectarios se acercan rápidamente, te amordazan y te colocan una pesada bolsa de tela negra en la cabeza.
 Sectario Líder: Excelente... El dragón estará complacido.
 Sientes cómo te arrastran durante lo que parecen horas por pasillos subterráneos, descendiendo cada vez más hacia el calor del subsuelo.
-    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
-// (Este código se ejecutará si el jugador compra o rechaza)
+
+// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
 <<set $eventoActual = $eventoActual + 1>>
 <<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
 <<jump {$siguiente_evento}>>
@@ -58,12 +98,33 @@ title: Combate_Sectarios_Ganar
 La pelea es brutal y caótica. Estás en desventaja numérica y el espacio es reducido, pero el instinto de supervivencia te da fuerzas.
 Esquivas la daga ritual del líder, desvías el ataque de uno de los encapuchados y contrasopesas el combate usando el entorno a tu favor.
 Tras unos agónicos minutos de acero y sangre, los tres sectarios yacen inmóviles en el suelo de piedra.
-Estás cubierto de cortes, pero sigues libre. Registras sus túnicas y encuentras un extraño amuleto con forma de ojo de reptil y algunas monedas.
 
+// --- SISTEMA DE ROTURA DE ARMAS ---
+<<if $arma_usada != "Ninguna">>
+    <<if HasSuccess(25)>>
+        <<if $arma_usada == "Sword">>
+            <<RemoveItem "Sword">>
+            <<set $tieneEspada = false>>
+            ¡CRACK! La túnica de los sectarios ocultaba placas de metal. Tu espada se ha hecho añicos.
+        <<elseif $arma_usada == "Dagger">>
+            <<RemoveItem "Dagger">>
+            <<set $tieneDaga = false>>
+            ¡CRACK! La hoja de tu daga se ha doblado y partido tras un mal impacto en las costillas del líder.
+        <<endif>>
+    <<else>>
+        Limpias la sangre oscura de tu arma. Por suerte, sigue intacta.
+    <<endif>>
+<<endif>>
+// ----------------------------------
+
+Estás cubierto de cortes, pero sigues libre. Registras sus túnicas y encuentras un extraño amuleto y algunas monedas.
+
+<<AddCoins 50>>
 ( Recibes Oro )
+
 Continúas tu camino a toda prisa, sabiendo que el culto del dragón acecha en estas profundidades.
-    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
-// (Este código se ejecutará si el jugador compra o rechaza)
+
+// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
 <<set $eventoActual = $eventoActual + 1>>
 <<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
 <<jump {$siguiente_evento}>>
@@ -77,4 +138,9 @@ El mundo empieza a dar vueltas. Caes de rodillas, completamente aturdido.
 Antes de perder el conocimiento, escuchas los susurros de los sectarios flotando sobre ti.
 Sectario Líder: Llevadlo a la cámara inferior... El ritual debe comenzar.
 Todo se vuelve negro...
+
+// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO (Secuestro exitoso) ---
+<<set $eventoActual = $eventoActual + 1>>
+<<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
+<<jump {$siguiente_evento}>>
 ===

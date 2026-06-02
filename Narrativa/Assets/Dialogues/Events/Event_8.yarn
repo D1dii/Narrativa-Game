@@ -1,6 +1,24 @@
 ﻿title: Event_8
 ---
-Llegas a una sala recien sacada de un cuento de hadas, solamente que mas tetrico... Parece que puede haber objetos valiosos.
+Llegas a una sala recién sacada de un cuento de hadas, solamente que más tétrico... Parece que puede haber objetos valiosos.
+
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if HasItem("Sword")>>
+    ( Arma equipada: Espada )
+<<elseif HasItem("Dagger")>>
+    ( Arma equipada: Daga )
+<<else>>
+    ( Arma equipada: Ninguna )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada: Sí )
+<<else>>
+    ( Armadura equipada: No )
+<<endif>>
+// -------------------------------
 
 ¿Qué decides hacer?
 
@@ -8,10 +26,12 @@ Llegas a una sala recien sacada de un cuento de hadas, solamente que mas tetrico
     No puedes dejar pasar una oportunidad así. Te tomas tu tiempo para revisar cada rincón, vaciar los cofres y guardar todo lo que brille en tu bolsa.
     Encuentras monedas antiguas, un par de cálices de plata y algunos objetos de valor que sin duda podrás vender por una buena suma.
     
+    <<AddCoins 150>>
     ( Has saqueado la sala. Consigues +150 de Oro )
     
     Satisfecho con el botín, ajustas el peso de tu mochila y te preparas para continuar explorando.
     <<jump Continuar_Mazmorra>>
+
 -> No arriesgarse y pasar de largo
     Algo en la atmósfera de esta sala te da mala espina. En las mazmorras, la codicia suele pagarse cara, y prefieres no perder el tiempo ni exponerte a posibles trampas ocultas o maldiciones.
     Decides ignorar los destellos dorados, mantienes la guardia alta y cruzas la sala directamente hacia la salida del otro lado.
@@ -25,6 +45,7 @@ Llegas a una sala recien sacada de un cuento de hadas, solamente que mas tetrico
 title: Continuar_Mazmorra
 ---
 Dejas atrás la cámara y te adentras de nuevo en la fría oscuridad de los pasillos principales de la mazmorra...
+
 // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
 <<set $eventoActual = $eventoActual + 1>>
 <<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>

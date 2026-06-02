@@ -1,7 +1,24 @@
 ﻿title: Event_7
 ---
-El pasillo se ensancha ligeramente. Al dar un paso al frente, la luz de tu antorcha revela un sutil relieve en el suelo; una gran losa de piedra ligeramente elevada. Es una placa de presión.
+El pasillo se ensancha ligeramente. Al dar un paso al frente, la luz de tu antorcha reveals un sutil relieve en el suelo; una gran losa de piedra ligeramente elevada. Es una placa de presión.
 Los muros a los lados están llenos de pequeños orificios oscuros, casi invisibles. Una trampa de dardos. El mecanismo bloquea todo el ancho del camino.
+
+// --- INFORMACIÓN DEL JUGADOR ---
+( Tienes {GetPlayerCoins()} monedas de oro )
+
+<<if $tiene_hijo == true>>
+    ( Acompañante: Tu hijo )
+<<else>>
+    ( Acompañante: Ninguno )
+<<endif>>
+
+<<if HasItem("Armor")>>
+    ( Armadura equipada: Sí )
+<<else>>
+    ( Armadura equipada: No )
+    // Modificamos una variable local por si cae en la trampa
+<<endif>>
+// -------------------------------
 
 <<if $tiene_hijo == true>>
     <<jump Placa_Presion_Con_Hijo>>
@@ -20,12 +37,11 @@ Hijo: Sí, el borde de la pared parece seguro. Déjame intentarlo.
 
 Con extremo cuidado, tu hijo se desliza pegado al muro, evitando la losa por completo. Al llegar al otro lado, introduce una pequeña cuña de piedra en el engranaje de la pared, desactivando el mecanismo por completo.
 Hijo: ¡Listo! Ya puedes pasar.
-Protagonista: Bien hecho chavalin.
+Protagonista: Bien hecho chavalín.
 
 Continúas tu camino por la mazmorra.
 
-    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
-// (Este código se ejecutará si el jugador compra o rechaza)
+// --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
 <<set $eventoActual = $eventoActual + 1>>
 <<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
 <<jump {$siguiente_evento}>>
@@ -38,7 +54,11 @@ No te queda más remedio que intentar cruzar con mucho cuidado.
 
 -> Intentar cruzar con cautela
     Respiras hondo, mides tus pasos e intentas pisar justo en el borde de la losa para no ejercer suficiente peso.
-    <<if HasSuccess(50)>>
+    
+    // Guardamos la probabilidad base de esquivar (50%)
+    <<set $probabilidad_trampa = 50>>
+    
+    <<if HasSuccess($probabilidad_trampa)>>
         Un ligero crujido resuena bajo tu bota, pero mantienes la calma y te impulsas rápidamente hacia el otro lado.
         Por una fracción de segundo, la losa cede, pero el mecanismo no llega a dispararse. Estás a salvo.
         Sueltas el aire que contenías en los pulmones y continúas tu camino, con el corazón a mil por hora.
@@ -50,10 +70,23 @@ No te queda más remedio que intentar cruzar con mucho cuidado.
     <<else>>
         Das un paso en falso. Un eco seco y metálico resuena en todo el pasillo.
         La placa se ha hundido por completo.
-        Antes de que puedas reaccionar, un silbido ensordecedor inunda el aire.
-        Decenas de dardos envenenados salen disparados de los muros, perforando tu armadura y tu carne en un instante.
-        El veneno paraliza tus músculos de inmediato. Caes al suelo de rodillas, incapaz de respirar.
-        La oscuridad de la mazmorra se traga tus últimos momentos de vida.
-        ( Fin de la partida )
+        Antes de que puedas reaccionar, un silbido ensordecedor inunda el aire y decenas de dardos salen disparados de los muros.
+        
+        <<if HasItem("Armor")>>
+            ¡CLANG! ¡CLANG! Varios dardos impactan directamente contra las placas de tu armadura, rebotando hacia el suelo. 
+            Uno de ellos logra rozar tu brazo desprotegido causándote un dolor agudo, pero la protección evitó que las puntas envenenadas se clavaran profundamente en tus órganos vitales.
+            Te apoyas contra la pared mareado, pero logras estabilizarte. Das gracias a los dioses por llevar metal encima.
+            
+            // --- CÓDIGO DE TRANSICIÓN (Sobrevive gracias a la armadura) ---
+            <<set $eventoActual = $eventoActual + 1>>
+            <<set $siguiente_evento = NextEvent($eventoActual, 5, $noCompra, $robaEncapuchado)>>
+            <<jump {$siguiente_evento}>>
+        <<else>>
+            Los proyectiles afilados perforan tus ropas y tu carne desprotegida en un instante.
+            El veneno paraliza tus músculos de inmediato. Caes al suelo de rodillas, incapaz de respirar.
+            La oscuridad de la mazmorra se traga tus últimos momentos de vida.
+            
+            ( Fin de la partida )
+        <<endif>>
     <<endif>>
 ===
