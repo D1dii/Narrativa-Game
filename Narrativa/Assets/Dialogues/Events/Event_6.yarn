@@ -3,7 +3,7 @@
 Avanzas por un pasillo húmedo y estrecho cuando escuchas unos quejidos débiles. 
 Al girar la esquina, ves a un hombre apoyado contra la pared, vistiendo una túnica andrajosa y agarrándose la pierna con expresión de dolor.
 
-//<<ShowSprite Sectario_Fingido>>
+<<ShowSprite SectarioHerido>>
 Hombre herido: ¡Por los dioses, al fin alguien con piedad! Por favor, ayúdame... 
 Hombre herido: Hay una capilla oculta justo aquí detrás. Los monstruos me atacaron, pero logré cerrar la puerta sagrada... 
 Hombre herido: Si me ayudas a llegar al altar, podré curarme y compartir las ofrendas contigo. Te lo ruego.
@@ -23,7 +23,7 @@ Hombre herido: Si me ayudas a llegar al altar, podré curarme y compartir las of
 
 title: Revelacion_Sectarios
 ---
-<<ShowSprite Sectario_Lider>>
+<<ShowSprite SectariosAparecen>>
 Dos figuras encapuchadas, portando dagas rituales y relucientes, emergen de las sombras a tus espaldas, bloqueando la única salida.
 
 ¿Hombre herido?: Alabad al Gran Dragón, hermanos. El sacrificio ha caminado directo hacia nuestro nido.
@@ -34,17 +34,17 @@ Sectario Líder: No opongas resistencia, mortal. Tu carne y tu sangre servirán 
 ( Tienes {GetPlayerCoins()} monedas de oro )
 
 <<if HasItem("Sword")>>
-    ( Arma equipada: Espada )
+    ( Arma equipada Espada )
 <<elseif HasItem("Dagger")>>
-    ( Arma equipada: Daga )
+    ( Arma equipada Daga )
 <<else>>
-    ( Arma equipada: Ninguna )
+    ( Arma equipada Ninguna )
 <<endif>>
 
 <<if HasItem("Armor")>>
-    ( Armadura equipada: Sí )
+    ( Armadura equipada Sí )
 <<else>>
-    ( Armadura equipada: No )
+    ( Armadura equipada No )
 <<endif>>
 // -------------------------------
 
@@ -95,8 +95,10 @@ Sientes cómo te arrastran durante lo que parecen horas por pasillos subterráne
 
 title: Combate_Sectarios_Ganar
 ---
+<<ShowSprite SectariosCombate>>
 La pelea es brutal y caótica. Estás en desventaja numérica y el espacio es reducido, pero el instinto de supervivencia te da fuerzas.
 Esquivas la daga ritual del líder, desvías el ataque de uno de los encapuchados y contrasopesas el combate usando el entorno a tu favor.
+<<ShowSprite SectariosMuertos>>
 Tras unos agónicos minutos de acero y sangre, los tres sectarios yacen inmóviles en el suelo de piedra.
 
 // --- SISTEMA DE ROTURA DE ARMAS ---
@@ -132,6 +134,7 @@ Continúas tu camino a toda prisa, sabiendo que el culto del dragón acecha en e
 
 title: Combate_Sectarios_Perder
 ---
+<<ShowSprite SectariosCombate>>
 Luchas con todas tus fuerzas, pero son demasiados y conocen el terreno.
 Logras repeler a uno de ellos, pero el líder aprovecha un punto ciego y te golpea fuertemente en la nuca con el pomo de su daga.
 El mundo empieza a dar vueltas. Caes de rodillas, completamente aturdido.
