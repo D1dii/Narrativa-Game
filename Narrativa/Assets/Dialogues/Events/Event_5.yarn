@@ -43,6 +43,8 @@ Ladrón jefe: Te lo voy a poner fácil, aventurero: déjanos la mitad de tus tes
     ( Arma equipada Espada )
 <<elseif HasItem("Dagger")>>
     ( Arma equipada Daga )
+<<elseif HasItem("Bow")>>
+    ( Arma equipada Arco )
 <<else>>
     ( Arma equipada Ninguna )
 <<endif>>
@@ -71,6 +73,9 @@ Ladrón jefe: Por otro lado... bueno, somos tres contra uno. Tú decides.
     <<elseif HasItem("Dagger")>>
         <<set $probabilidad_ataque = $probabilidad_ataque + 20>>
         <<set $arma_usada = "Dagger">>
+    <<elseif HasItem("Bow")>>
+        <<set $probabilidad_ataque = $probabilidad_ataque + 40>>
+        <<set $arma_usada = "Bow">>
     <<endif>>
     
     // COMPROBACIÓN DE ARMADURA
