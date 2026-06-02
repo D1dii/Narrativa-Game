@@ -10,4 +10,5 @@
 // Declaración de decisiones y eventos pasados
 <<declare $noCompra = false>>
 <<declare $robaEncapuchado = false>>
+<<declare $hijoAcompañante = false>>
 ===
