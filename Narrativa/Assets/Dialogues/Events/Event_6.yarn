@@ -4,7 +4,7 @@ Avanzas por un pasillo húmedo y estrecho cuando escuchas unos quejidos débiles
 Al girar la esquina, ves a un hombre apoyado contra la pared, vistiendo una túnica andrajosa y agarrándose la pierna con expresión de dolor.
 
 <<ShowSprite SectarioHerido>>
-Hombre herido: ¡Por los dioses, al fin alguien con piedad! Por favor, ayúdame... 
+Hombre herido: Ayuda, porfavor... *cough cough* 
 Hombre herido: Hay una capilla oculta justo aquí detrás. Los monstruos me atacaron, pero logré cerrar la puerta sagrada... 
 Hombre herido: Si me ayudas a llegar al altar, podré curarme y compartir las ofrendas contigo. Te lo ruego.
 
@@ -14,9 +14,9 @@ Hombre herido: Si me ayudas a llegar al altar, podré curarme y compartir las of
     Al llegar al fondo, notas que las paredes están grabadas con runas extrañas. De repente, los quejidos del hombre cesan. Se endereza lentamente y deja escapar una risa fría y fanática.
     <<jump Revelacion_Sectarios>>
 -> Desconfiar
-    Protagonista: No me fío un pelo de ti. Tus ropas y tus heridas huelen a trampa.
+    Protagonista: Esta situación me suena... Creo que seguiré mi camino
     El hombre suspira, poniéndose de pie sin ningún rastro de cojera o dolor, mientras una sonrisa mística dibuja su rostro.
-    ¿Hombre herido?: Una lástima... Hubiera sido más fácil si hubieras venido por tu propio pie. Pero el destino del Elegido ya está sellado.
+    ¿Hombre herido?: Una lástima... Hubiera sido más fácil si hubieras venido por tu propio pie. Pero tu destino ya está sellado.
     El hombre alza las manos y entona un cántico en un idioma arcano.
     <<jump Revelacion_Sectarios>>
 ===
@@ -26,7 +26,7 @@ title: Revelacion_Sectarios
 <<ShowSprite SectariosAparecen>>
 Dos figuras encapuchadas, portando dagas rituales y relucientes, emergen de las sombras a tus espaldas, bloqueando la única salida.
 
-¿Hombre herido?: Alabad al Gran Dragón, hermanos. El sacrificio ha caminado directo hacia nuestro nido.
+¿Hombre herido?: Alabad al Gran Dragón, hermanas. El sacrificio ha caminado directo hacia nuestro nido.
 El líder de la secta da un paso al frente, sus ojos brillan con un misticismo peligroso debajo de la capucha.
 Sectario Líder: No opongas resistencia, mortal. Tu carne y tu sangre servirán para despertar al devorador de mundos. Entrégate voluntariamente y tu transición será indolora.
 
