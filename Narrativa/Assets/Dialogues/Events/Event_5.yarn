@@ -1,21 +1,26 @@
 ﻿title: Event_5
 ---
+<<ShowSprite BandidosEntorno>>
 Avanzas por un pasillo húmedo y estrecho cuando escuchas unos quejidos débiles. 
+<<ShowSprite BandidoHerido>>
 Al girar la esquina, ves a un hombre apoyado contra la pared, agarrándose la pierna con expresión de dolor.
 
-//<<ShowSprite Hombre_Herido>>
 Hombre herido: ¡Por los dioses, al fin alguien! Por favor, ayúdame... 
 Hombre herido: Hay una sala secreta justo aquí detrás con un cofre, pero hay una trampa y me he lastimado la pierna... 
 Hombre herido: Si me ayudas a abrirlo, compartiremos el oro. Te lo juro.
 
 -> Ayudar al hombre
+    <<ShowSprite BandidoSeguir>>
     A pesar de tus dudas, la promesa de riquezas te empuja a seguirlo por un callejón oscuro y sin salida.
-    Al llegar al fondo, te das cuenta de que no hay ningún cofre. 
+    <<ShowSprite BandidosPasillo>>
+    Al llegar al fondo, te das cuenta de que no hay ningún cofre.
+    <<ShowSprite BandidoSonrisa>>
     De repente, la actitud del hombre cambia por completo. Se endereza, suelta una carcajada y silba.
     <<jump Revelacion_Ladrones>>
 -> Desconfiar
     Protagonista: No me fío un pelo de ti. Esto huele a trampa.
     El hombre suspira, poniéndose de pie sin ningún rastro de cojera o dolor.
+    <<ShowSprite BandidoSonrisa>>
     Hombre herido: Pfff... ¿Tanto se nota? Supongo que tendré que practicar más frente al espejo.
     El hombre sonríe con malicia y suelta un silbido agudo.
     <<jump Revelacion_Ladrones>>
@@ -23,11 +28,11 @@ Hombre herido: Si me ayudas a abrirlo, compartiremos el oro. Te lo juro.
 
 title: Revelacion_Ladrones
 ---
-<<ShowSprite Ladron_Jefe>>
-Dos figuras armadas emergen de las sombras a tus espaldas, bloqueando la única salida del pasillo.
+<<ShowSprite BandidosRefuerzos>>
+Dos figuras armadas emergen de las sombras a sus espaldas, bloqueando la única salida del pasillo.
 
 Hombre herido: Bueno muchachos, ya sabéis lo que toca.
-El hombre que fingía estar herido saca un hacha de mano y te apunta con ella.
+El hombre que fingía estar herido saca una maza y te apunta con ella.
 Ladrón jefe: Te lo voy a poner fácil, aventurero: déjanos la mitad de tus tesoros y te dejaremos marchar con vida.
 
 
@@ -86,6 +91,7 @@ title: Rendirse_Ladrones
 Lanzas la mitad de tu botín al suelo con rabia contenida.
 Los ladrones se ríen mientras recogen las monedas apresuradamente.
 Ladrón jefe: Ha sido un placer hacer negocios contigo. ¡Y recuerda vigilar tus espaldas!
+<<ShowSprite BandidosPasillo>>
 Los tres bandidos retroceden perdiéndose en la oscuridad del pasillo, dejándote más pobre, pero con vida.
 Respiras hondo y continúas tu camino por la mazmorra.
     // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
@@ -98,9 +104,9 @@ Respiras hondo y continúas tu camino por la mazmorra.
 title: Combate_Ladrones_Ganar
 ---
 La pelea es brutal y caótica. Estás en desventaja numérica y el espacio es reducido.
-Esquivas un hachazo del líder, usas a uno de los compinches como escudo contra el otro y te abres paso a base de pura adrenalina.
-Tras unos eternos diez minutos, los tres ladrones yacen muertos formando un charco de sangre.
-
+Esquivas un golpe del líder, usas a uno de los compinches como escudo contra el otro y te abres paso a base de pura adrenalina.
+<<ShowSprite BandidosMuertos>>
+Tras unos diez minutos, los tres ladrones yacen muertos formando un charco de sangre.
 // --- SISTEMA DE ROTURA DE ARMAS ---
 <<if $arma_usada != "Ninguna">>
     <<if HasSuccess(25)>>
@@ -117,28 +123,27 @@ Tras unos eternos diez minutos, los tres ladrones yacen muertos formando un char
         Limpias la sangre de tu arma. Por suerte, sigue intacta.
     <<endif>>
 <<endif>>
-    // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
+Estás cubierto de cortes y magulladuras, pero sigues en pie.
+Registras los bolsillos de los bandidos, consiguiendo un buen botín que seguramente habían robado a otros ingenuos.
+
+<<AddCoins 50>>
+( Recibes 50 de Oro )
+Continúas tu camino, ahora mucho más alerta a los engaños de la mazmorra.
+ // --- CÓDIGO DE TRANSICIÓN AL SIGUIENTE EVENTO ---
 // (Este código se ejecutará si el jugador compra o rechaza)
 <<set $eventoActual = $eventoActual + 1>>
 <<set $siguiente_evento = NextEvent($eventoActual, 10, $noCompra, $robaEncapuchado)>>
 <<jump {$siguiente_evento}>>
 // ----------------------------------
-
-Estás cubierto de cortes y magulladuras, pero sigues en pie.
-Registras los bolsillos de los bandidos, consiguiendo un buen botín que seguramente habían robado a otros ingenuos.
-
-<<AddCoins 50>>
-( Recibes Oro )
-Continúas tu camino, ahora mucho más alerta a los engaños de la mazmorra.
 ===
 
 title: Combate_Ladrones_Perder
 ---
 Luchas con todas tus fuerzas, pero el espacio reducido y la desventaja numérica juegan en tu contra.
-Logras herir a uno de los compinches, pero el líder te asesta un fuerte golpe por la espalda con el mango del hacha.
+Logras herir a uno de los compinches, pero el líder te asesta un fuerte golpe por la espalda con el mango de la maza.
 
 Caes al suelo aturdido. Antes de que puedas reaccionar, sientes el frío acero perforando tu pecho.
-
+<<ShowSprite BandidosGanan>>
 Ladrón jefe: Te había avisado... ahora asume las consecuencias.
 
 Mientras se nubla tu vista, ves a los bandidos saqueando todo tu equipo.

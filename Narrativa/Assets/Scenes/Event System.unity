@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 653824678}
-  nodoInicial: StartGame
+  nodoInicial: Event_5
 --- !u!4 &1452965241
 Transform:
   m_ObjectHideFlags: 0
@@ -925,6 +925,22 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 3c3311217e1bd22419d83ed1dcb28a98, type: 3}
   - spriteName: HMOro
     sprite: {fileID: 21300000, guid: 12d1adff9195057499eec4153565b106, type: 3}
+  - spriteName: BandidosRefuerzos
+    sprite: {fileID: 21300000, guid: 6117cfc91b44b804fa3113a897a91c13, type: 3}
+  - spriteName: BandidosMuertos
+    sprite: {fileID: 21300000, guid: 7aab51d95468a8a479661c1f64249157, type: 3}
+  - spriteName: BandidoSonrisa
+    sprite: {fileID: 21300000, guid: 1a52c522e6e00b2479df9bada4335176, type: 3}
+  - spriteName: BandidoHerido
+    sprite: {fileID: 21300000, guid: 9e5732b32aaf7e14199ab0b0e8cf4805, type: 3}
+  - spriteName: BandidoSeguir
+    sprite: {fileID: 21300000, guid: 7df09461525b6d64da022c5548324467, type: 3}
+  - spriteName: BandidosGanan
+    sprite: {fileID: 21300000, guid: c15dff11ab2f5d648bb7055c707ceb58, type: 3}
+  - spriteName: BandidosEntorno
+    sprite: {fileID: 21300000, guid: 8000f6d6b1981ba40a0ca0fffdc21d90, type: 3}
+  - spriteName: BandidosPasillo
+    sprite: {fileID: 21300000, guid: 9b9ef2723df74d845a9671be9a7ba634, type: 3}
 --- !u!4 &1720068709
 Transform:
   m_ObjectHideFlags: 0
