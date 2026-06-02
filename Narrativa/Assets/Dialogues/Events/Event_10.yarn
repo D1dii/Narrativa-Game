@@ -52,7 +52,7 @@ Dragón: **Habla, mortal. Dame una sola razón para no convertirte en cenizas en
     
     // PENALIZADOR POR AVARICIA (Si le robaste el oro, se vuelve casi imposible)
     <<if $saqueo_dragon == true>>
-        <<set $probabilidad_persuasion = $probabilidad_persuasion - 40>>
+        <<set $probabilidad_persuasion = $probabilidad_persuasion - 20>>
     <<endif>>
     
     El dragón entrecierra los ojos, sopesando tus palabras. El fuego en sus fauces parece menguar por un segundo...
