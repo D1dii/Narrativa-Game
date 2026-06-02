@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScene.unity
     guid: c09b03bd2859e244b8b7417df08807df
   - enabled: 1
+    path: Assets/Scenes/CinematicaInicial.unity
+    guid: 086ae4bc3356f1543a9c4beb7641eebf
+  - enabled: 1
     path: Assets/Scenes/InitialScene.unity
     guid: 4d7642af090801749aabcdb267e2d33e
   - enabled: 1
@@ -21,14 +24,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Event System.unity
     guid: 16ff66222b1eb9846819cd01b1623bcb
   - enabled: 1
-    path: Assets/Scenes/CinematicaDerrota.unity
-    guid: 068e39d643f1ca4438ef7268639e1e06
-  - enabled: 1
-    path: Assets/Scenes/CinematicaInicial.unity
-    guid: 086ae4bc3356f1543a9c4beb7641eebf
-  - enabled: 1
     path: Assets/Scenes/CinematicaNormal.unity
     guid: 859222b8ab622e74191ddbdee988f819
+  - enabled: 1
+    path: Assets/Scenes/CinematicaDerrota.unity
+    guid: 068e39d643f1ca4438ef7268639e1e06
   - enabled: 1
     path: Assets/Scenes/CinematicaVictoria.unity
     guid: da3f41e2ba09467488e4d088e0297a59
