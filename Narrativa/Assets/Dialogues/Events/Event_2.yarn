@@ -179,7 +179,7 @@ El duende cae al suelo, soltando su pesado saco.
 Sin perder tiempo, rebuscas entre sus pertenencias y saqueas algunas monedas.
 
 <<AddCoins 50>>
-( Recibes Oro )
+( Recibes 50 de Oro )
 Satisfecho con el botín, sigues tu camino por la mazmorra.
 
 <<jump Continuar_Mazmorra_Duende>>

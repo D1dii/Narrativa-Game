@@ -49,6 +49,8 @@ De pronto, un pensamiento oscuro cruza tu mente. El botín de este hombre no es 
             <<ShowSprite 8>>
             <<set $robaEncapuchado = true>>
             Le arrebatas las monedas de las manos. El hombre, llorando y cubierto de moretones, huye arrastrándose hacia la salida.
+            <<AddCoins 50>>
+            (Recibes 50 de oro)
         -> Seguir golpeando
             Ignoras sus llantos y continúas golpeando. El sonido de tus puños resuena en la sala durante minutos...
                     <<ShowSprite 6>>
